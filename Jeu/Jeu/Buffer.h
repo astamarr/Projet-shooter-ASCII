@@ -5,7 +5,7 @@
 #include <iostream>;
 #include <Windows.h>;
 #include <stdlib.h>;
-
+// JE SUIS UN GRIOS COMMENTAIRE
 using namespace std;
 
 class Buffer
