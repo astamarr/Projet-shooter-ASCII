@@ -43,6 +43,7 @@ $RECYCLE.BIN/
 .obj
 .pch
 .ilk
+.opendb
 
 # Directories potentially created on remote AFP share
 .AppleDB
