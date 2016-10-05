@@ -1,12 +1,13 @@
 #pragma once
-#include "stdafx.h"
-#include "Buffer.h"
+#include "Ressource.h";
+
 #include "stdafx.h"
 #include <iostream>
 #include <Windows.h>
 #include <stdlib.h>
-// JE SUIS UN GRIOS COMMENTAIRE
 using namespace std;
+// JE SUIS UN GRIOS COMMENTAIRE
+
 
 class Buffer
 {
@@ -31,6 +32,7 @@ public:
 	void Reset(int color);
 	void Update(int x, int y , char c);
 	void Update(int x, int y, char c, char color);
-	void LoadFromFile(string file);
+	void UpdateWithBuffer(int x, int y, Ressource *  test);
+	void LoadFromFile(std::string file);
 };
 

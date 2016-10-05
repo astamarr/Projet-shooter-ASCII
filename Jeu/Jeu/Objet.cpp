@@ -1,4 +1,5 @@
 #include "Objet.h"
+#include "Assets.h"
 
 void Objet::Move(const float x, const float y, const float time) {
 	_xSpeed += x * time * _maxSpeed;
