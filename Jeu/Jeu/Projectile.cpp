@@ -15,3 +15,7 @@ Projectile::Projectile(int x, int y, float xSpeed, float ySpeed)
 Projectile::~Projectile()
 {
 }
+
+Projectile::Projectile(const Projectile& cible) : Objet(cible){
+	
+}
