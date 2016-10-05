@@ -1,4 +1,5 @@
 #include "Objet.h"
+#include "Assets.h"
 
 Objet::Objet(int x, int y, int collisionRadius, float maxSpeed, float maxDec, float maxAcc) {
 	_x = x;
