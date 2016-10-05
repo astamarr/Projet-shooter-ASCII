@@ -1,9 +1,33 @@
 #include "Objet.h"
 #include "Assets.h"
 
+Objet::Objet(int x, int y, int collisionRadius, float maxSpeed, float maxDec, float maxAcc) {
+	_x = x;
+	_y = y;
+	_collisionRadius = collisionRadius;
+	_maxSpeed = maxSpeed;
+	_maxDec = maxDec;
+	_maxAcc = maxAcc;
+}
+
+Objet::Objet(const Objet& cible) {
+	_x = cible._x;
+	_y = cible._y;
+	_maxAcc = cible._maxAcc;
+	_maxDec = cible._maxDec;
+	_maxSpeed = cible._maxSpeed;
+	_xSpeed = cible._xSpeed;
+	_ySpeed = cible._ySpeed;
+	_deltaX = cible._deltaX;
+	_deltaY = cible._deltaY;
+	_collisionRadius = cible._collisionRadius;
+	_exist=cible._exist;
+}
+
 void Objet::Move(const float x, const float y, const float time) {
-	_xSpeed += x * time * _maxSpeed;
-	_ySpeed += y * time * _maxSpeed;
+
+	_xSpeed += x * time * _maxAcc * _maxSpeed;
+	_ySpeed += y * time * _maxAcc * _maxSpeed;
 	if (_xSpeed > _maxSpeed) _xSpeed = _maxSpeed;
 	if (_xSpeed < -_maxSpeed) _xSpeed = -_maxSpeed;
 	if (_ySpeed > _maxSpeed) _ySpeed = _maxSpeed;
@@ -33,5 +57,12 @@ void Objet::Update(const float time) {
 	else {
 		_ySpeed -= deltaSpeed;
 	}
+
 }
 
+bool Objet::Collide(const Objet& cible) {
+	if (abs(cible._x - _x) < (cible._collisionRadius + _collisionRadius) &&
+		abs(cible._y - _y) < (cible._collisionRadius + _collisionRadius))
+		return true;
+	return false;
+}
