@@ -8,7 +8,7 @@ private:
 	float _deltaX, _deltaY;
 
 public:
-	Objet() : _deltaX(0.f), _deltaY(0.f), _maxSpeed(0.f) {};
+	Objet() : _deltaX(0.f), _deltaY(0.f), _maxSpeed(50.f) {};
 	~Objet() {};
 	
 	void Move(const float x,const float y);

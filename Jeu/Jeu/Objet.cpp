@@ -14,7 +14,7 @@ void Objet::Update(const int time) {
 	float movey = (_ySpeed*time)/1000.f;
 	_deltaX += movex;
 	_deltaY += movey;
-	_x += (int)_deltaX;
+	_x += (int)_deltaX; //
 	_y += (int)_deltaY;
 	_deltaX -= (int)_deltaX;
 	_deltaY -= (int)_deltaY;
