@@ -4,7 +4,7 @@
 
 class Objet
 {
-private:
+protected:
 	int _x=10, _y=10;
 	float _maxAcc = 1.f;
 	float _maxDec = 2.f;

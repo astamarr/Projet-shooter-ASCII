@@ -1,10 +1,10 @@
 #pragma once
 #include "stdafx.h"
 #include "Buffer.h"
-#include "stdafx.h";
-#include <iostream>;
-#include <Windows.h>;
-#include <stdlib.h>;
+#include "stdafx.h"
+#include <iostream>
+#include <Windows.h>
+#include <stdlib.h>
 // JE SUIS UN GRIOS COMMENTAIRE
 using namespace std;
 
