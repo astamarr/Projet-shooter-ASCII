@@ -29,9 +29,12 @@ void Buffer::Update(int x, int y, char c, char color)
 {
 	buffer[x][y].Char.AsciiChar = c;
 	buffer[x][y].Attributes = color;
+}
 
-
-
+void Buffer::UpdateUni(int x, int y, WCHAR c, char color)
+{
+	buffer[x][y].Char.UnicodeChar = c;
+	buffer[x][y].Attributes = color;
 }
 
 
@@ -62,4 +65,8 @@ void Buffer::LoadFromFile(string file)
 void Buffer::Draw() {
 	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
 		dwBufferCoord, &rcRegion);
+}
+
+void Buffer::Reset() {
+	memset(buffer, 0, SCREEN_HEIGHT*SCREEN_WIDTH*sizeof(CHAR_INFO));
 }

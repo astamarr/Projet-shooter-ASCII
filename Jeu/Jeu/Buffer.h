@@ -28,8 +28,10 @@ public:
 	~Buffer();
 
 	void Draw();
+	void Reset();
 	void Update(int x, int y , char c);
 	void Update(int x, int y, char c, char color);
+	void UpdateUni(int x, int y, WCHAR c, char color);
 	void LoadFromFile(string file);
 };
 
