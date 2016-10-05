@@ -15,7 +15,6 @@ using namespace std;
 
 int main()
 {
-	_setmode(_fileno(stdout), _O_U16TEXT);
 	Buffer * a = new Buffer();
 	NYTimer *  timer = new NYTimer();
 	timer->start();
@@ -24,16 +23,20 @@ int main()
 	while (true) {
 
 		time = timer->getElapsedMs(true);
-		//a->Reset();
-		a->Draw();
-		a->UpdateUni(o.GetX(), o.GetY(), 0x264, 0x0F);
+		a->Reset();
+		
+		a->Update(o.GetY()/100, o.GetX()/100, 'O', 0x0F);
 
 		if (GetAsyncKeyState('Q'))
-			break;
+			o.Move(-50*(time/10.0), 0);
 		if (GetAsyncKeyState('D'))
-			o.Move(5, 0);
-		o.Update();
-		
+			o.Move(50*(time/10.0), 0);
+		if (GetAsyncKeyState('S'))
+			o.Move(0,50 * (time / 10.0));
+		if (GetAsyncKeyState('Z'))
+			o.Move(0,-50 * (time / 10.0));
+
+		a->Draw();
 		
 	}
 

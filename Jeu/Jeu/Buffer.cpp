@@ -31,12 +31,6 @@ void Buffer::Update(int x, int y, char c, char color)
 	buffer[x][y].Attributes = color;
 }
 
-void Buffer::UpdateUni(int x, int y, WCHAR c, char color)
-{
-	buffer[x][y].Char.UnicodeChar = c;
-	buffer[x][y].Attributes = color;
-}
-
 
 void Buffer::LoadFromFile(string file)
 {
@@ -63,6 +57,7 @@ void Buffer::LoadFromFile(string file)
 	cin >> line;
 }
 void Buffer::Draw() {
+	//memcpy(buffer, buffer, SCREEN_WIDTH*SCREEN_HEIGHT * sizeof(CHAR_INFO));
 	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
 		dwBufferCoord, &rcRegion);
 }
