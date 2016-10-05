@@ -4,6 +4,7 @@
 
 PlayerObject::PlayerObject()
 {
+	
 	_shootTime = 1.f;
 }
 
@@ -18,7 +19,7 @@ bool PlayerObject::ReadyToShoot() {
 
 const Projectile& PlayerObject::Shoot() {
 	_lastShoot = 0.f;
-	return _projectileType;
+	//return _projectileType;
 }
 
 void PlayerObject::Update(float time)
