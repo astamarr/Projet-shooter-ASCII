@@ -6,7 +6,7 @@ class Projectile :
 private:
 
 public:
-	Projectile(int x, int y, float xSpeed = 0.f , float ySpeed = 0.f) _x(x), _y(y);
+	Projectile(int x, int y, float xSpeed = 0.f, float ySpeed = 0.f);
 	~Projectile();
 };
 

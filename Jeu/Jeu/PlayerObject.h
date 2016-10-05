@@ -7,7 +7,7 @@ class PlayerObject :
 private:
 	float _shootTime;
 	float _lastShoot;
-	Projectile _projectileType;
+//	Projectile _projectileType;
 public:
 	PlayerObject();
 	~PlayerObject();
