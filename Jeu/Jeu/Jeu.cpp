@@ -15,28 +15,30 @@ using namespace std;
 
 int main()
 {
-	Buffer * a = new Buffer();
-	NYTimer *  timer = new NYTimer();
-	timer->start();
+	Buffer a;
+	NYTimer timer;
+	timer.start();
 	Objet o;
-	int time = 0;
+	float time;
 	while (true) {
 
-		time = timer->getElapsedMs(true);
-		a->Reset(0xC0);
-		
-		a->Update(o.GetY(), o.GetX(), 'O', 0x00);
+		time = timer.getElapsedSeconds(true);
+		a.Reset(0xC0);
+		a.Update(o.GetY(), o.GetX(), 'O', 0x00);
 
 		if (GetAsyncKeyState('Q'))
-			o.Move(-1, 0);
+			o.Move(-1, 0, time);
 		if (GetAsyncKeyState('D'))
-			o.Move(1, 0);
+			o.Move(1, 0, time);
 		if (GetAsyncKeyState('S'))
-			o.Move(0,1);
+			o.Move(0,1, time);
 		if (GetAsyncKeyState('Z'))
-			o.Move(0,-1);
+			o.Move(0,-1, time);
 		o.Update(time);
-		a->Draw();
+#ifdef _DEBUG
+		//timer.start();
+#endif
+		a.Draw();
 		
 	}
 
