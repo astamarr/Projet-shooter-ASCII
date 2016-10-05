@@ -1,11 +1,11 @@
-#include "Buffer.h";
+#include "Buffer.h"
 #pragma warning (disable : 4996)
 #pragma comment( lib, "winmm" )
-#include <stdio.h>;
-#include <sstream>;
-#include <Windows.h>;
-#include <string>;
-#include <fstream>;
+#include <stdio.h>
+#include <sstream>
+#include <Windows.h>
+#include <string>
+#include <fstream>
 using namespace std;
 Buffer::Buffer()
 {
