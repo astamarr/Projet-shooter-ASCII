@@ -23,19 +23,19 @@ int main()
 	while (true) {
 
 		time = timer->getElapsedMs(true);
-		a->Reset();
+		a->Reset(0xC0);
 		
-		a->Update(o.GetY()/100, o.GetX()/100, 'O', 0x0F);
+		a->Update(o.GetY(), o.GetX(), 'O', 0x00);
 
 		if (GetAsyncKeyState('Q'))
-			o.Move(-50*(time/10.0), 0);
+			o.Move(-1, 0);
 		if (GetAsyncKeyState('D'))
-			o.Move(50*(time/10.0), 0);
+			o.Move(1, 0);
 		if (GetAsyncKeyState('S'))
-			o.Move(0,50 * (time / 10.0));
+			o.Move(0,1);
 		if (GetAsyncKeyState('Z'))
-			o.Move(0,-50 * (time / 10.0));
-
+			o.Move(0,-1);
+		o.Update(time);
 		a->Draw();
 		
 	}

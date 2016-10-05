@@ -62,6 +62,6 @@ void Buffer::Draw() {
 		dwBufferCoord, &rcRegion);
 }
 
-void Buffer::Reset() {
-	memset(buffer, 0, SCREEN_HEIGHT*SCREEN_WIDTH*sizeof(CHAR_INFO));
+void Buffer::Reset(int color) {
+	memset(buffer, color, SCREEN_HEIGHT*SCREEN_WIDTH*sizeof(CHAR_INFO));
 }

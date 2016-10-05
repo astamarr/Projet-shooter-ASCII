@@ -3,14 +3,16 @@ class Objet
 {
 private:
 	int _x=10, _y=10;
+	float _xSpeed = 0.0f, _ySpeed = 0.0f;
+	float _deltaX, _deltaY;
 
 public:
-	Objet() {};
+	Objet() : _deltaX(0.f), _deltaY(0.f) {};
 	~Objet() {};
 	
-	void Move(int x, int y) {
-		_x += x; _y += y;
-	};
+	void Move(const float x,const float y);
+
+	void Update(const int time);
 
 	int GetX() { return _x; };
 	int GetY() { return _y; };
