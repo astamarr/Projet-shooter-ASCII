@@ -16,6 +16,7 @@ public:
 	static const int SCREEN_HEIGHT = 22;
 	HANDLE hOutput;
 	CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
+	CHAR_INFO drawBuffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 	COORD dwBufferSize;
 	COORD dwBufferCoord;
 	SMALL_RECT rcRegion ;
@@ -31,6 +32,7 @@ public:
 	void Reset();
 	void Update(int x, int y , char c);
 	void Update(int x, int y, char c, char color);
+	void UpdateUni(int x, int y, WCHAR c, char color);
 	void LoadFromFile(string file);
 };
 
