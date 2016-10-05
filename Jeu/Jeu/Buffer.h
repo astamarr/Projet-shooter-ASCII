@@ -28,7 +28,7 @@ public:
 	~Buffer();
 
 	void Draw();
-	void Reset();
+	void Reset(int color);
 	void Update(int x, int y , char c);
 	void Update(int x, int y, char c, char color);
 	void LoadFromFile(string file);
