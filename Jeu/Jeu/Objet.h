@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include "Buffer.h"
 
 class Objet
 {
@@ -23,6 +24,7 @@ public:
 	void Move(const float x,const float y, const float time);
 
 	void Update(const float time);
+	void Draw(Buffer& buffer);
 
 	void SetPosition(const int x, const int y) { _x = x; _y = y; };
 	void MovePosition(const int x, const int y) { _x += x; _y += y; };

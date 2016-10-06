@@ -7,6 +7,7 @@ private:
 
 public:
 
+	Projectile() {};
 	Projectile(int x, int y, float xSpeed = 0.f, float ySpeed = 0.f);
 
 

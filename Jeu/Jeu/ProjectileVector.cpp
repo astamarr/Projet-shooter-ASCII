@@ -1,17 +1,16 @@
-#include "ObjectVector.h"
+#include "ProjectileVector.h"
 
 
 
-/*ObjectVector::ObjectVector()
-{
-}*/
 
 
-ObjectVector::~ObjectVector()
+
+ProjectileVector::~ProjectileVector()
 {
 }
 
-unsigned int ObjectVector::AddObject(const Objet& obj) {
+
+unsigned int ProjectileVector::AddObject(const Projectile& obj) {
 	unsigned int position = nextAvailable;
 	if (position == vector.size()) {
 		vector.push_back(obj);
@@ -24,37 +23,38 @@ unsigned int ObjectVector::AddObject(const Objet& obj) {
 	return position;
 }
 
-unsigned int ObjectVector::AddObject(const Objet& obj, int x, int y) {
+unsigned int ProjectileVector::AddObject(const Projectile& obj, int x, int y) {
 	unsigned int position = AddObject(obj);
 	vector[position].SetPosition(x, y);
 	return position;
 }
 
-bool ObjectVector::Collide(const Objet& obj) {
+bool ProjectileVector::Collide(const Objet& obj) {
 	for (auto& it : vector)
 		if (it.isAlive() && it.Collide(obj))
 			return true;
 	return false;
 }
-void ObjectVector::SearchNext() {
+
+void ProjectileVector::SearchNext() {
 	while (nextAvailable < vector.size() && vector[nextAvailable].isAlive())
 		nextAvailable++;
 }
 
-void ObjectVector::Update(const float time) {
+void ProjectileVector::Update(const float time) {
 	for (auto& it : vector)
 		if(it.isAlive())
 			it.Update(time);
 }
 
-void ObjectVector::Draw(Buffer& buffer) {
+void ProjectileVector::Draw(Buffer& buffer) {
 	for (auto& it : vector) {
 		if(it.isAlive())
 			buffer.Update(it.GetY(), it.GetX(), '+', 0x0F);
 	}
 }
 
-void ObjectVector::UpdateWithBoundCheck(float time) {
+void ProjectileVector::UpdateWithBoundCheck(float time) {
 	for (auto& it : vector) {
 		if (it.isAlive())
 			it.Update(time);

@@ -2,7 +2,7 @@
 
 
 
-PlayerObject::PlayerObject() : arme(WP_SHOTGUN)
+PlayerObject::PlayerObject() : _arme(WP_SHOTGUN)
 {
 	
 
@@ -22,7 +22,7 @@ const Projectile& PlayerObject::Shoot() {
 void PlayerObject::Update(float time)
 {
 	Objet::Update(time);
-	arme.Update(time);
+	_arme.Update(time);
 	if (_x < 0)
 		_x = 0;
 	if (_y < 0)
@@ -33,6 +33,10 @@ void PlayerObject::Update(float time)
 		_y = Buffer::SCREEN_HEIGHT - 1;
 }
 
-void PlayerObject::Shoot(ObjectVector& proj) {
-	arme.Shoot(proj,_x,_y);
+void PlayerObject::Shoot(ProjectileVector& proj) {
+	_arme.Shoot(proj,_x,_y);
+}
+
+void PlayerObject::Draw(Buffer& buffer) {
+	buffer.Update( _y, _x, 'X', 0x0F);
 }
