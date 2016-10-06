@@ -70,7 +70,7 @@ int main()
 		enemies.Update(time);
 		projectile.UpdateWithBoundCheck(time);
 
-		a.MoveStars(-150.f, 0, time);
+		a.MoveStars(-90.f, 0, time);
 
 #ifdef _DEBUG
 		//timer.start();
