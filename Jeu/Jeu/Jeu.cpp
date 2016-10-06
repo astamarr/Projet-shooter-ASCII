@@ -7,6 +7,8 @@
 #include <stdlib.h>;
 #include <io.h>
 #include <fcntl.h>
+#include "Assets.h"
+#include "Ressource.h"
 #include "Buffer.h";
 #include "Objet.h"
 #include "NYtimer.h";
@@ -20,11 +22,22 @@ int main()
 	timer.start();
 	Objet o;
 	float time;
+	
+
+	
+	Assets   testAssets; 
+	testAssets.LoadPlayerFromFile("ship.txt");
+
+
+
+
+
 	while (true) {
 
 		time = timer.getElapsedSeconds(true);
-		a.Reset(0xC0);
-		a.Update(o.GetY(), o.GetX(), 'O', 0x00);
+		a.Reset(0x00);
+		a.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.Player);
+		//a.Update(o.GetY(), o.GetX(), 'O', 0x00);
 
 		if (GetAsyncKeyState('Q'))
 			o.Move(-1, 0, time);

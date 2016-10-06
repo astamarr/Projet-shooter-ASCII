@@ -1,11 +1,13 @@
-#include "Buffer.h";
+#include "Buffer.h"
+
+
 #pragma warning (disable : 4996)
 #pragma comment( lib, "winmm" )
-#include <stdio.h>;
-#include <sstream>;
-#include <Windows.h>;
-#include <string>;
-#include <fstream>;
+#include <stdio.h>
+#include <sstream>
+#include <Windows.h>
+#include <string>
+#include <fstream>
 using namespace std;
 Buffer::Buffer()
 {
@@ -31,12 +33,36 @@ void Buffer::Update(int x, int y, char c, char color)
 	buffer[x][y].Attributes = color;
 }
 
+void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
+
+	int xsize = External->xBufferSize;
+	int ysize = External->yBufferSize;
+
+	for (int xIterator = 0; xIterator < xsize; xIterator++) {
+
+		for (int yIterator = 0; yIterator < ysize; yIterator++)
+		{
+			char a;
+			a= External->_Buffer[xIterator][yIterator].Char.AsciiChar;
+		
+		buffer[x + xIterator][y + yIterator].Char.AsciiChar = External->_Buffer[xIterator][yIterator].Char.AsciiChar;
+		buffer[x + xIterator][y + yIterator].Attributes =  0x0a;
+		}
+
+
+	}
+
+
+
+
+}
+
 
 void Buffer::LoadFromFile(string file)
 {
 	ifstream infile(file, ifstream::in);
 	int number_of_lines = 0;
-	string line;
+	std::string line;
 	int SizeMaxOfLine = 0;
 	while (infile.good())
 	{
