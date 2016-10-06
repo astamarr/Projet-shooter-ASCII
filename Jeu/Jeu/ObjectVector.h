@@ -21,5 +21,6 @@ public:
 	size_t size() { return vector.size(); };
 	Objet& operator[](unsigned int index) { return vector[index]; };
 	void Draw(Buffer& buffer);
+	void UpdateWithBoundCheck(float time);
 };
 

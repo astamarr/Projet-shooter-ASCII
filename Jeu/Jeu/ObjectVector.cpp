@@ -43,12 +43,22 @@ void ObjectVector::SearchNext() {
 
 void ObjectVector::Update(const float time) {
 	for (auto& it : vector)
-		it.Update(time);
+		if(it.isAlive())
+			it.Update(time);
 }
 
 void ObjectVector::Draw(Buffer& buffer) {
 	for (auto& it : vector) {
 		if(it.isAlive())
 			buffer.Update(it.GetY(), it.GetX(), '+', 0x0F);
+	}
+}
+
+void ObjectVector::UpdateWithBoundCheck(float time) {
+	for (auto& it : vector) {
+		if (it.isAlive())
+			it.Update(time);
+		if (it.GetX() < 0 || it.GetY() < 0 || it.GetX() >= Buffer::SCREEN_WIDTH || it.GetY() >= Buffer::SCREEN_HEIGHT)
+			it.Kill();
 	}
 }

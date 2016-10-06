@@ -23,6 +23,7 @@ int main()
 	NYTimer timer;
 	timer.start();
 	Objet o;
+	Objet e(20,20,3,2.f);
 	float time;
 	ObjectVector projectile;
 	
@@ -58,7 +59,7 @@ int main()
 		if (GetAsyncKeyState(VK_SPACE))
 			projectile.AddObject(Projectile(o.GetX(), o.GetY(), 35.f, 0.f));
 		o.Update(time);
-		projectile.Update(time);
+		projectile.UpdateWithBoundCheck(time);
 #ifdef _DEBUG
 		//timer.start();
 #endif
