@@ -31,10 +31,7 @@ Ressource::Ressource(string name, string type, CHAR_INFO ** ResBuffer,const int 
 	}
 	memcpy(_Buffer[0], ResBuffer[0], xBufferSize * yBufferSize * sizeof _Buffer[0][0]);
 
-	for (int test = 0; test < 3; test++) {
-
-		cout << _Buffer[test][1].Char.AsciiChar;
-	}
+	
 
 	
 		// ACCESS THE DATA WITH A SINGLE BLOCK :

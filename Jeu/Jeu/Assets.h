@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Ressource.h"
 #include <iostream>
+#include <vector>
 #include <Windows.h>
 #include <stdlib.h>
 #include "Buffer.h"
@@ -20,12 +21,15 @@ class Assets
 {
 public:
 
-	Ressource * Player;
-
+	Ressource * _RPlayer;
+	vector<Ressource*> _vRessources;
 	Assets();
+
+
 
 	~Assets();
 	void LoadPlayerFromFile(std::string file);
+	Ressource* GetAsset(string RessourceName);
 
 };
 

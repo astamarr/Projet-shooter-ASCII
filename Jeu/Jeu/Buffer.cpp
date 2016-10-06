@@ -37,10 +37,15 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 
 	int xsize = External->xBufferSize;
 	int ysize = External->yBufferSize;
+	x -= xsize / 2;
+	y -= ysize / 2;
+	int xoff = (x < 0) ? -x : 0;
+	int yoff = (y < 0) ? -y : 0;
+	xsize -= ((x + xoff + xsize) >= SCREEN_WIDTH) ? (x + xoff + xsize) - SCREEN_WIDTH : 0;
+	ysize -= ((y + yoff + ysize) >= SCREEN_HEIGHT) ? (y + yoff + ysize) - SCREEN_HEIGHT : 0;
+	for (int xIterator = xoff; xIterator < xsize; xIterator++) {
 
-	for (int xIterator = 0; xIterator < xsize; xIterator++) {
-
-		for (int yIterator = 0; yIterator < ysize; yIterator++)
+		for (int yIterator = yoff; yIterator < ysize; yIterator++)
 		{
 			char a;
 			a= External->_Buffer[xIterator][yIterator].Char.AsciiChar;
@@ -70,7 +75,7 @@ void Buffer::LoadFromFile(string file)
 		if (line.length() > SizeMaxOfLine) {
 			SizeMaxOfLine = line.length();
 		}
-		for (int iterator = 0; iterator < SCREEN_WIDTH; iterator++) {
+		for (int iterator = 0; iterator < 70; iterator++) {
 			char a = line.at(iterator);
 			buffer[number_of_lines][iterator].Char.AsciiChar = a;
 			buffer[number_of_lines][iterator].Attributes = 0x4a;
@@ -90,4 +95,31 @@ void Buffer::Draw() {
 
 void Buffer::Reset(int color) {
 	memset(buffer, color, SCREEN_HEIGHT*SCREEN_WIDTH*sizeof(CHAR_INFO));
+}
+
+void Buffer::InitStars() {
+	for (int i = 0; i < STARS_NUMBER; i++) {
+		starBuffer[i].x = rand() % SCREEN_WIDTH;
+		starBuffer[i].y = rand() % SCREEN_HEIGHT;
+		starBuffer[i].c = '*';
+		starBuffer[i].color = rand() % 0x0F;
+	}
+}
+
+void Buffer::DrawStars() {
+	for (int i = 0; i < STARS_NUMBER; i++)
+		Update(starBuffer[i].y, starBuffer[i].x, starBuffer[i].c, starBuffer[i].color);
+}
+
+void Buffer::MoveStars(const float x, const float y, float time) {
+	starDeltaX += x*time;
+	starDeltaX += y*time;
+	for (int i = 0; i < STARS_NUMBER; i++) {
+		starBuffer[i].x += (int)starDeltaX;
+		starBuffer[i].x %= SCREEN_WIDTH;
+		starBuffer[i].y += (int)starDeltaY;
+		starBuffer[i].y %= SCREEN_HEIGHT;
+	}
+	starDeltaX -= (int)starDeltaX;
+	starDeltaY -= (int)starDeltaY;
 }

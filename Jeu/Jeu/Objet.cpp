@@ -8,6 +8,7 @@ Objet::Objet(int x, int y, int collisionRadius, float maxSpeed, float maxDec, fl
 	_maxSpeed = maxSpeed;
 	_maxDec = maxDec;
 	_maxAcc = maxAcc;
+	_exist = true;
 }
 
 Objet::Objet(const Objet& cible) {

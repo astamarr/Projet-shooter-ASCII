@@ -1,7 +1,7 @@
 #pragma once
-#include <iostream>;
-#include <Windows.h>;
-#include <stdlib.h>;
+#include <iostream>
+#include <Windows.h>
+#include <stdlib.h>
 #include <io.h>
 #include <map>
 #include <fcntl.h>
