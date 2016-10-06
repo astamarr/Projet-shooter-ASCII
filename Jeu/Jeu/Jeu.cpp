@@ -25,8 +25,10 @@ int main()
 	
 
 	
-	Assets   testAssets; 
+	Assets   testAssets;
+	Assets   testAssets2;
 	testAssets.LoadPlayerFromFile("ship.txt");
+	testAssets2.LoadPlayerFromFile("ship2.txt");
 
 
 
@@ -37,6 +39,7 @@ int main()
 		time = timer.getElapsedSeconds(true);
 		a.Reset(0x00);
 		a.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.Player);
+		a.UpdateWithBuffer(20, 20, testAssets2.Player);
 		//a.Update(o.GetY(), o.GetX(), 'O', 0x00);
 
 		if (GetAsyncKeyState('Q'))

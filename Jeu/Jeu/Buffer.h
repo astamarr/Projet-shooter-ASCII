@@ -13,8 +13,8 @@ class Buffer
 {
 public:
 
-	 static const int SCREEN_WIDTH = 77;
-	static const int SCREEN_HEIGHT = 22;
+	 static const int SCREEN_WIDTH = 200;
+	static const int SCREEN_HEIGHT = 200;
 	HANDLE hOutput;
 	CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 	COORD dwBufferSize;
