@@ -75,10 +75,29 @@ void Buffer::LoadFromFile(string file)
 		if (line.length() > SizeMaxOfLine) {
 			SizeMaxOfLine = line.length();
 		}
-		for (int iterator = 0; iterator < 70; iterator++) {
+		for (int iterator = 0; iterator < 71; iterator++) {
 			char a = line.at(iterator);
 			buffer[number_of_lines][iterator].Char.AsciiChar = a;
-			buffer[number_of_lines][iterator].Attributes = 0x4a;
+
+			switch (a)
+			{
+
+			case 'M':
+				buffer[number_of_lines][iterator].Attributes = 0x0004;
+				break;
+			case 'H':
+				buffer[number_of_lines][iterator].Attributes = 0x04;
+				break;
+			case '0':
+				buffer[number_of_lines][iterator].Attributes = 0x04;
+				break;
+			case '/':
+				buffer[number_of_lines][iterator].Attributes = 0x04;
+				break;
+			}
+
+		
+			
 		}
 		++number_of_lines;
 		//cout << line;

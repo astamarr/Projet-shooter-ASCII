@@ -21,10 +21,11 @@ using namespace std;
 
 int main()
 {
-	Buffer a;
+	Buffer MainBuffer;
 	NYTimer timer;
 	timer.start();
 	PlayerObject o;
+	Objet méchant;
 	ObjectVector enemies;
 	float time;
 	float shootTimer = 0;
@@ -35,9 +36,9 @@ int main()
 	Assets   testAssets;
 	Assets   testAssets2;
 	testAssets.LoadPlayerFromFile("ship.txt");
-	testAssets2.LoadPlayerFromFile("ship2.txt");
+	testAssets.LoadPlayerFromFile("ship2.txt");
 
-	a.InitStars();
+	MainBuffer.InitStars();
 
 
 
@@ -45,13 +46,18 @@ int main()
 
 		time = timer.getElapsedSeconds(true);
 		shootTimer += time;
-		a.Reset(0x00);
+		MainBuffer.Reset(0x00);
 		
-		a.DrawStars();
+		MainBuffer.DrawStars();
 		//a.Update(o.GetY(), o.GetX(), 'O', 0x00);
-		projectile.Draw(a);
-		a.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.GetAsset("player"));
-		enemies.Draw(a);
+		projectile.Draw(MainBuffer);
+
+
+		MainBuffer.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.GetAsset("player"));
+		MainBuffer.UpdateWithBuffer(10, 50, testAssets.GetAsset("target"));
+
+
+		enemies.Draw(MainBuffer);
 
 		if (GetAsyncKeyState('Q'))
 			o.Move(-1, 0, time);
@@ -70,12 +76,12 @@ int main()
 		enemies.Update(time);
 		projectile.UpdateWithBoundCheck(time);
 
-		a.MoveStars(-120.f, 0, time);
+		MainBuffer.MoveStars(-120.f, 0, time);
 
 #ifdef _DEBUG
 		//timer.start();
 #endif
-		a.Draw();
+		MainBuffer.Draw();
 		
 	}
 
