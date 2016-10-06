@@ -28,6 +28,7 @@ public:
 
 
 	~Assets();
+	
 	void LoadPlayerFromFile(std::string file);
 	Ressource* GetAsset(string RessourceName);
 

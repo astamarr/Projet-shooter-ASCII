@@ -19,8 +19,8 @@ class Buffer
 {
 public:
 
-	static const int SCREEN_WIDTH = 200;
-	static const int SCREEN_HEIGHT = 200;
+	static const int SCREEN_WIDTH = 250;
+	static const int SCREEN_HEIGHT = 250;
 	static const int STARS_NUMBER = 200;
 	HANDLE hOutput;
 	CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
@@ -49,6 +49,7 @@ public:
 
 	void InitStars();
 	void DrawStars();
+	void DrawText();
 	void MoveStars(const float x, const float y, float time);
 
 	
