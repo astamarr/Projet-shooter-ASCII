@@ -33,6 +33,7 @@ unsigned int ObjectVector::AddObject(const Objet& obj, int x, int y) {
 bool ObjectVector::Collide(const Objet& obj) {
 	for (auto& it : vector)
 		if (it.Collide(obj))
+		if (it.isAlive() && it.Collide(obj))
 			return true;
 	return false;
 }
