@@ -70,7 +70,7 @@ void Buffer::LoadFromFile(string file)
 		if (line.length() > SizeMaxOfLine) {
 			SizeMaxOfLine = line.length();
 		}
-		for (int iterator = 0; iterator < SCREEN_WIDTH; iterator++) {
+		for (int iterator = 0; iterator < 70; iterator++) {
 			char a = line.at(iterator);
 			buffer[number_of_lines][iterator].Char.AsciiChar = a;
 			buffer[number_of_lines][iterator].Attributes = 0x4a;
