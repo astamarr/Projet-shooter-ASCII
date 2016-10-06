@@ -12,6 +12,7 @@
 #include "Ressource.h"
 #include "Buffer.h"
 #include "Objet.h"
+#include "PlayerObject.h"
 #include "Projectile.h"
 #include "ObjectVector.h"
 #include "NYtimer.h";
@@ -23,7 +24,7 @@ int main()
 	Buffer a;
 	NYTimer timer;
 	timer.start();
-	Objet o;
+	PlayerObject o;
 	ObjectVector enemies;
 	float time;
 	float shootTimer = 0;
@@ -49,7 +50,7 @@ int main()
 		a.DrawStars();
 		//a.Update(o.GetY(), o.GetX(), 'O', 0x00);
 		projectile.Draw(a);
-		a.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.Player);
+		a.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.GetAsset("player"));
 		enemies.Draw(a);
 
 		if (GetAsyncKeyState('Q'))
@@ -63,14 +64,14 @@ int main()
 		if (GetAsyncKeyState(VK_ESCAPE))
 			break;
 		if (GetAsyncKeyState(VK_SPACE) && shootTimer > .05f) {
-			projectile.AddObject(Projectile(o.GetX(), o.GetY(), 35.f, (rand()%1000-500)/25.f));
+			projectile.AddObject(Projectile(o.GetX(), o.GetY(), 170.f, (rand()%1000-500)/25.f));
 			shootTimer = 0.f;
 		}
 		o.Update(time);
 		enemies.Update(time);
 		projectile.UpdateWithBoundCheck(time);
 
-		a.MoveStars(-90.f, 0, time);
+		a.MoveStars(-120.f, 0, time);
 
 #ifdef _DEBUG
 		//timer.start();
