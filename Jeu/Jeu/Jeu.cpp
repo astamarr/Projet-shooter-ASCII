@@ -64,8 +64,7 @@ int main()
 		if (GetAsyncKeyState(VK_ESCAPE))
 			break;
 		if (GetAsyncKeyState(VK_SPACE) && shootTimer > .05f) {
-			projectile.AddObject(Projectile(o.GetX(), o.GetY(), 170.f, (rand()%1000-500)/25.f));
-			shootTimer = 0.f;
+			o.Shoot(projectile);
 		}
 		o.Update(time);
 		enemies.Update(time);
