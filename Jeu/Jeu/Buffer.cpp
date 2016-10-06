@@ -39,10 +39,13 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 	int ysize = External->yBufferSize;
 	x -= xsize / 2;
 	y -= ysize / 2;
+	int xoff = (x < 0) ? -x : 0;
+	int yoff = (y < 0) ? -y : 0;
+	xsize -= ((x + xoff + xsize) >= SCREEN_WIDTH) ? (x + xoff + xsize) - SCREEN_WIDTH : 0;
+	ysize -= ((y + yoff + ysize) >= SCREEN_HEIGHT) ? (y + yoff + ysize) - SCREEN_HEIGHT : 0;
+	for (int xIterator = xoff; xIterator < xsize; xIterator++) {
 
-	for (int xIterator = 0; xIterator < xsize; xIterator++) {
-
-		for (int yIterator = 0; yIterator < ysize; yIterator++)
+		for (int yIterator = yoff; yIterator < ysize; yIterator++)
 		{
 			char a;
 			a= External->_Buffer[xIterator][yIterator].Char.AsciiChar;

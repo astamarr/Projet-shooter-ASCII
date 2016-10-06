@@ -1,5 +1,6 @@
 #pragma once
 #include "Objet.h"
+#include "Buffer.h"
 #include "Projectile.h"
 class PlayerObject :
 	public Objet
