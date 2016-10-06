@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <io.h>
 #include <fcntl.h>
+#include <random>
 #include "Assets.h"
 #include "Ressource.h"
 #include "Buffer.h"
@@ -23,33 +24,33 @@ int main()
 	NYTimer timer;
 	timer.start();
 	Objet o;
-	Objet e(20,20,3,2.f);
-	Objet f(30, 30, 3, 2.f);
+	ObjectVector enemies;
 	float time;
+	float shootTimer = 0;
 	ObjectVector projectile;
-	
+	srand(25);
 
 	
 	Assets   testAssets;
-
+	Assets   testAssets2;
 	testAssets.LoadPlayerFromFile("ship.txt");
-	testAssets.LoadPlayerFromFile("ship2.txt");
+	testAssets2.LoadPlayerFromFile("ship2.txt");
 
-
+	a.InitStars();
 
 
 
 	while (true) {
 
 		time = timer.getElapsedSeconds(true);
+		shootTimer += time;
 		a.Reset(0x00);
 		
-		a.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.GetAsset("player"));
-		if(e.isAlive())
-			a.UpdateWithBuffer(e.GetY(), e.GetX(), testAssets.GetAsset("target"));
-		a.UpdateWithBuffer(f.GetY(), f.GetX(), testAssets.GetAsset("target"));
+		a.DrawStars();
 		//a.Update(o.GetY(), o.GetX(), 'O', 0x00);
 		projectile.Draw(a);
+		a.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.Player);
+		enemies.Draw(a);
 
 		if (GetAsyncKeyState('Q'))
 			o.Move(-1, 0, time);
@@ -61,13 +62,15 @@ int main()
 			o.Move(0,-1, time);
 		if (GetAsyncKeyState(VK_ESCAPE))
 			break;
-		if (GetAsyncKeyState(VK_SPACE))
-			projectile.AddObject(Projectile(o.GetX(), o.GetY(), 70.f, 0.f));
+		if (GetAsyncKeyState(VK_SPACE) && shootTimer > .05f) {
+			projectile.AddObject(Projectile(o.GetX(), o.GetY(), 35.f, (rand()%1000-500)/25.f));
+			shootTimer = 0.f;
+		}
 		o.Update(time);
-		//e.Update(time);
-		if (projectile.Collide(e))
-			e.Kill();
+		enemies.Update(time);
 		projectile.UpdateWithBoundCheck(time);
+
+		a.MoveStars(-90.f, 0, time);
 
 #ifdef _DEBUG
 		//timer.start();
