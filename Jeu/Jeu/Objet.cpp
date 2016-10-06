@@ -8,6 +8,7 @@ Objet::Objet(int x, int y, int collisionRadius, float maxSpeed, float maxDec, fl
 	_maxSpeed = maxSpeed;
 	_maxDec = maxDec;
 	_maxAcc = maxAcc;
+	_exist = true;
 }
 
 Objet::Objet(const Objet& cible) {
@@ -61,8 +62,8 @@ void Objet::Update(const float time) {
 }
 
 bool Objet::Collide(const Objet& cible) {
-	if (abs(cible._x - _x) < (cible._collisionRadius + _collisionRadius) &&
-		abs(cible._y - _y) < (cible._collisionRadius + _collisionRadius))
+	if (abs(cible._x - _x) <= (cible._collisionRadius + _collisionRadius) &&
+		abs(cible._y - _y) <= (cible._collisionRadius + _collisionRadius))
 		return true;
 	return false;
 }

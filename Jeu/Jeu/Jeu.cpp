@@ -44,7 +44,8 @@ int main()
 		a.Reset(0x00);
 		
 		a.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.Player);
-		a.UpdateWithBuffer(20, 20, testAssets2.Player);
+		if(e.isAlive())
+			a.UpdateWithBuffer(e.GetY(), e.GetX(), testAssets2.Player);
 		//a.Update(o.GetY(), o.GetX(), 'O', 0x00);
 		projectile.Draw(a);
 
@@ -56,10 +57,16 @@ int main()
 			o.Move(0,1, time);
 		if (GetAsyncKeyState('Z'))
 			o.Move(0,-1, time);
+		if (GetAsyncKeyState(VK_ESCAPE))
+			break;
 		if (GetAsyncKeyState(VK_SPACE))
 			projectile.AddObject(Projectile(o.GetX(), o.GetY(), 35.f, 0.f));
 		o.Update(time);
+		//e.Update(time);
+		if (projectile.Collide(e))
+			e.Kill();
 		projectile.UpdateWithBoundCheck(time);
+
 #ifdef _DEBUG
 		//timer.start();
 #endif
