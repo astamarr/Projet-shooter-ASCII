@@ -150,6 +150,7 @@
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="Jeu.h" />
     <ClInclude Include="NYtimer.h" />
+    <ClInclude Include="ObjectVector.h" />
     <ClInclude Include="Objet.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="Projectile.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Jeu.cpp" />
+    <ClCompile Include="ObjectVector.cpp" />
     <ClCompile Include="Objet.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="Projectile.cpp" />

@@ -1,5 +1,5 @@
 #pragma once
-#include "Ressource.h";
+#include "Ressource.h"
 
 #include "stdafx.h"
 #include <iostream>
