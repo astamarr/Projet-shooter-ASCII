@@ -37,6 +37,8 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 
 	int xsize = External->xBufferSize;
 	int ysize = External->yBufferSize;
+	x -= xsize / 2;
+	y -= ysize / 2;
 
 	for (int xIterator = 0; xIterator < xsize; xIterator++) {
 
@@ -90,4 +92,31 @@ void Buffer::Draw() {
 
 void Buffer::Reset(int color) {
 	memset(buffer, color, SCREEN_HEIGHT*SCREEN_WIDTH*sizeof(CHAR_INFO));
+}
+
+void Buffer::InitStars() {
+	for (int i = 0; i < STARS_NUMBER; i++) {
+		starBuffer[i].x = rand() % SCREEN_WIDTH;
+		starBuffer[i].y = rand() % SCREEN_HEIGHT;
+		starBuffer[i].c = '*';
+		starBuffer[i].color = rand() % 0x0F;
+	}
+}
+
+void Buffer::DrawStars() {
+	for (int i = 0; i < STARS_NUMBER; i++)
+		Update(starBuffer[i].y, starBuffer[i].x, starBuffer[i].c, starBuffer[i].color);
+}
+
+void Buffer::MoveStars(const float x, const float y, float time) {
+	starDeltaX += x*time;
+	starDeltaX += y*time;
+	for (int i = 0; i < STARS_NUMBER; i++) {
+		starBuffer[i].x += (int)starDeltaX;
+		starBuffer[i].x %= SCREEN_WIDTH;
+		starBuffer[i].y += (int)starDeltaY;
+		starBuffer[i].y %= SCREEN_HEIGHT;
+	}
+	starDeltaX -= (int)starDeltaX;
+	starDeltaY -= (int)starDeltaY;
 }
