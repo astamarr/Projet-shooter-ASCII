@@ -5,8 +5,6 @@
 Assets::Assets()
 {
 	
-
-
 }
 
 
@@ -23,6 +21,7 @@ void Assets::LoadPlayerFromFile(std::string file) {
 	int SizeMaxOfLine = 0;
 	int xsize;
 	int ysize;
+	string Type;
 	CHAR_INFO ** buffer = nullptr;
 	
 	int lign = 0;
@@ -35,7 +34,7 @@ void Assets::LoadPlayerFromFile(std::string file) {
 		getline(infile, line);
 		if (number_of_lines == 0) {
 			
-			// convert first line to string
+			// convert first line to int
 			xsize = atoi(line.c_str());
 			
 			++number_of_lines;
@@ -54,50 +53,66 @@ void Assets::LoadPlayerFromFile(std::string file) {
 			}
 			continue;
 		}
+		else if (number_of_lines == 2) {
+			Type = line;
+			++number_of_lines;
+			continue;
+		}
 
 		else
-		{
 
-			
-			
+		{
 			char a;
 
 			for (int iterator = 0; iterator < ysize; iterator++) {
  				 a = line.at(iterator);
 				buffer[lign][iterator].Char.AsciiChar = a;
 				buffer[lign][iterator].Attributes = 0x0a;
-				 
-				CHAR_INFO c = buffer[lign][iterator];
-				std::cout << buffer[lign][iterator].Char.AsciiChar;
 			}
-			cout << endl;
+		
 			
 			++number_of_lines;
 			++lign;
+		}
+	}
 
-			
-
+	/*
+	if (Type == "player") {
+		_RPlayer = new Ressource(file, Type, buffer, xsize, ysize);
+		_vRessources.push_back(_RPlayer);
 
 		}
 
-	}
-	
-	for (int x = 0; x < xsize ; x++) {
-		cout << endl;
-		for (int y = 0; y < ysize; y++)
-		{
-			CHAR_INFO c = buffer[x][y];
-
-			cout << buffer[x][y].Char.AsciiChar;
+	*/
 		
+		_vRessources.push_back(new Ressource(file, Type, buffer, xsize, ysize));
+		delete[] buffer[0];
+		delete[] buffer;
 
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+Ressource* Assets::GetAsset(string RessourceName) {
+
+	for (int Iterator = 0; Iterator < _vRessources.size(); Iterator++) {
+		
+		if (_vRessources[Iterator]->_stype == RessourceName) {
+
+			return _vRessources[Iterator];
 		}
+
 	}
-	//std::cout << buffer[2][2].Char.AsciiChar;
-		Player = new Ressource(file, "joueur", buffer, xsize, ysize);
-
-	
-
 
 
 }

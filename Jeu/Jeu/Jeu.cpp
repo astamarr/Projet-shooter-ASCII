@@ -24,15 +24,16 @@ int main()
 	timer.start();
 	Objet o;
 	Objet e(20,20,3,2.f);
+	Objet f(30, 30, 3, 2.f);
 	float time;
 	ObjectVector projectile;
 	
 
 	
 	Assets   testAssets;
-	Assets   testAssets2;
+
 	testAssets.LoadPlayerFromFile("ship.txt");
-	testAssets2.LoadPlayerFromFile("ship2.txt");
+	testAssets.LoadPlayerFromFile("ship2.txt");
 
 
 
@@ -43,9 +44,10 @@ int main()
 		time = timer.getElapsedSeconds(true);
 		a.Reset(0x00);
 		
-		a.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.Player);
+		a.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.GetAsset("player"));
 		if(e.isAlive())
-			a.UpdateWithBuffer(e.GetY(), e.GetX(), testAssets2.Player);
+			a.UpdateWithBuffer(e.GetY(), e.GetX(), testAssets.GetAsset("target"));
+		a.UpdateWithBuffer(f.GetY(), f.GetX(), testAssets.GetAsset("target"));
 		//a.Update(o.GetY(), o.GetX(), 'O', 0x00);
 		projectile.Draw(a);
 
@@ -60,7 +62,7 @@ int main()
 		if (GetAsyncKeyState(VK_ESCAPE))
 			break;
 		if (GetAsyncKeyState(VK_SPACE))
-			projectile.AddObject(Projectile(o.GetX(), o.GetY(), 35.f, 0.f));
+			projectile.AddObject(Projectile(o.GetX(), o.GetY(), 70.f, 0.f));
 		o.Update(time);
 		//e.Update(time);
 		if (projectile.Collide(e))
