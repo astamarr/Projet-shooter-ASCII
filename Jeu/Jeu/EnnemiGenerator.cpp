@@ -67,3 +67,10 @@ void EnnemiGenerator::Action(ProjectileVector& proj, float time) {
 		if(it.isAlive())
 			it.Action(proj, time);
 }
+
+void EnnemiGenerator::Collide(ProjectileVector& proj) {
+	for (auto& it : vector) {
+		if (it.isAlive())
+			proj.Collide(it);
+	}
+}

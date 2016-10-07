@@ -7,13 +7,22 @@ LevelManager::~LevelManager()
 {
 }
 
+void LevelManager::Reset() {
+	player.Alive();
+	player.SetLife(3);
+}
+
 void LevelManager::Update(float time) {
 	ennemis.Update(time);
 	ennemis.Action(ennemiProjectile, time);
 	playerProjectile.UpdateWithBoundCheck(time);
 	ennemiProjectile.UpdateWithBoundCheck(time);
 	player.Update(time);
+	ennemis.Collide(playerProjectile);
+	ennemiProjectile.Collide(player);
 	levelTimer += time;
+	if (!player.isAlive())
+		_levelState = 1;
 	if (levelTimer > 1.f) {
 		ennemis.Generate(0);
 		levelTimer = 0.f;
@@ -21,10 +30,15 @@ void LevelManager::Update(float time) {
 }
 
 void LevelManager::Draw(Buffer& buffer) {
-	ennemis.Draw(buffer);
-	playerProjectile.Draw(buffer);
-	ennemiProjectile.Draw(buffer);
-	player.Draw(buffer);
+	if (_levelState == 0) {
+		ennemis.Draw(buffer);
+		playerProjectile.Draw(buffer);
+		ennemiProjectile.Draw(buffer);
+		player.Draw(buffer);
+	}
+	else {
+		buffer.DrawText("Perdu!", 10, 5, 0x0F);
+	}
 	
 }
 

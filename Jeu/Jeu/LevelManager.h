@@ -18,12 +18,15 @@ private:
 	Assets &_assets;
 
 	float levelTimer = 0;
+	int _levelState = 0;
 
 
 public:
 	LevelManager();
-	LevelManager(Assets &assets) : _assets(assets) {};
+	LevelManager(Assets &assets) : _assets(assets) { Reset(); };
 	~LevelManager();
+
+	void Reset();
 
 	void Update(float time);
 	void Draw(Buffer& buffer);

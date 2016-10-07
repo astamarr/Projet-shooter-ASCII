@@ -19,6 +19,7 @@ public:
 	void Update(float time);
 	void Shoot(ProjectileVector& proj);
 	void Draw(Buffer& buffer);
-	void GetHit(int damage) { _life -= damage; };
+	void GetHit(int damage);
+	void SetLife(int life) { _life = life; };
 };
 

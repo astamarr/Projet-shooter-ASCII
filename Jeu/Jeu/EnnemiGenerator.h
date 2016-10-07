@@ -20,5 +20,6 @@ public:
 	void SearchNext();
 	void Draw(Buffer& buffer);
 	void Action(ProjectileVector& proj, float time);
+	void Collide(ProjectileVector& proj);
 };
 
