@@ -35,11 +35,16 @@ void LevelManager::Draw(Buffer& buffer) {
 		playerProjectile.Draw(buffer);
 		ennemiProjectile.Draw(buffer);
 		player.Draw(buffer);
+		DrawInterface(buffer);
 	}
 	else {
 		buffer.DrawText("Perdu!", 10, 5, 0x0F);
 	}
 	
+}
+
+void LevelManager::DrawInterface(Buffer &buffer) {
+	buffer.DrawText(player.GetWeaponName(), 20, 0, 0x04);
 }
 
 void LevelManager::Event(float time) {
@@ -51,6 +56,8 @@ void LevelManager::Event(float time) {
 		player.Move(0, 1, time);
 	if (GetAsyncKeyState('Z'))
 		player.Move(0, -1, time);
+	if (GetAsyncKeyState(VK_SHIFT))
+		player.RollWeapon();
 	if (GetAsyncKeyState(VK_SPACE)) {
 		player.Shoot(playerProjectile);
 	}

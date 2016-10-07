@@ -30,6 +30,7 @@ public:
 
 	void Update(float time);
 	void Draw(Buffer& buffer);
+	void DrawInterface(Buffer &buffer);
 	
 	void Event(float time);
 

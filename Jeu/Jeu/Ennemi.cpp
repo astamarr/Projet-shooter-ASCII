@@ -46,6 +46,7 @@ void Ennemi::Set() {
 void Ennemi::Update(float time) {
 	Objet::Update(time);
 	_arme.Update(time);
+	_invulnerabily += time;
 	if (_life <= 0)
 		Kill();
 }

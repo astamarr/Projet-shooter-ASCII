@@ -10,6 +10,8 @@ class PlayerObject :
 protected:
 	Arme _arme;
 	int _life;
+	float _rollingTimer=0;
+	float _invulnerabily = 0;
 
 public:
 	PlayerObject();
@@ -21,5 +23,8 @@ public:
 	void Draw(Buffer& buffer);
 	void GetHit(int damage);
 	void SetLife(int life) { _life = life; };
+
+	void RollWeapon();
+	const std::string GetWeaponName() { return _arme.GetName(); };
 };
 

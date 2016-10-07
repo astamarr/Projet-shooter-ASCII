@@ -23,6 +23,8 @@ void PlayerObject::Update(float time)
 {
 	Objet::Update(time);
 	_arme.Update(time);
+	_rollingTimer += time;
+	_invulnerabily += time;
 	if (_x < 0)
 		_x = 0;
 	if (_y < 0)
@@ -38,11 +40,22 @@ void PlayerObject::Shoot(ProjectileVector& proj) {
 }
 
 void PlayerObject::Draw(Buffer& buffer) {
-	buffer.UpdateFromAsset( _y, _x, "player");
+	if((_invulnerabily>1.5f) || ((int)(_invulnerabily*100)%50)>25)
+		buffer.UpdateFromAsset( _y, _x, "player");
 }
 
 void PlayerObject::GetHit(int damage) {
+	if (_invulnerabily < 1.5f)
+		return;
 	_life -= damage;
 	if (_life <= 0)
 		Kill();
+	_invulnerabily = 0.f;
+}
+
+void PlayerObject::RollWeapon() {
+	if (_rollingTimer > 0.5f) {
+		_arme.RollType(); 
+		_rollingTimer = 0;
+	}
 }
