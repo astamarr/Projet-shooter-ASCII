@@ -2,11 +2,11 @@
 
 
 
-Ennemi::Ennemi()
+Ennemi::Ennemi() : PlayerObject()
 {
 }
 
-Ennemi::Ennemi(int type, int x, int y) : _type(type) {
+Ennemi::Ennemi(int type, int x, int y) : PlayerObject(), _type(type) {
 	SetPosition(x, y);
 	Alive();
 	Set();
@@ -33,6 +33,7 @@ void Ennemi::Set() {
 
 void Ennemi::Update(float time) {
 	Objet::Update(time);
+	_arme.Update(time);
 	if (_life <= 0)
 		Kill();
 }
