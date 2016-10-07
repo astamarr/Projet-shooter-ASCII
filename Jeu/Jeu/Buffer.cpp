@@ -21,6 +21,7 @@ Buffer::Buffer()
 	_Assets.LoadPlayerFromFile("ship.txt");
 	_Assets.LoadPlayerFromFile("ship2.txt");
 	_Assets.LoadPlayerFromFile("ship3.txt");
+	_Assets.LoadPlayerFromFile("gameover.txt");
 }
 Buffer::~Buffer()
 {

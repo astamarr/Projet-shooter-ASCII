@@ -34,7 +34,7 @@ void Ennemi::Set() {
 		_arme.SetType(WP_SHOTGUN);
 		_arme.SetAngle(180.f);
 		_collisionRadius = 1;
-		_maxSpeed = 100.f;
+		_maxSpeed = 200.f;
 		LinkedRes = "runner";
 		_maxAcc = 25.f;
 		_maxDec = 25.f;

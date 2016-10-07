@@ -78,7 +78,8 @@ void LevelManager::UpdateLevel(Buffer &buffer, float time) {
 		}
 		break;
 	case LVL_LOST:
-		buffer.DrawText("Perdu!", 10, 5, 0x0F);
+		//buffer.DrawText("Perdu!", 10, 5, 0x0F);
+		buffer.UpdateFromAsset(15, 50, "gameover");
 		break;
 	default:
 		break;

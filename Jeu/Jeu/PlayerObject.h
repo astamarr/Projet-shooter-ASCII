@@ -4,6 +4,9 @@
 #include "Buffer.h"
 #include "Projectile.h"
 #include "Arme.h"
+
+
+
 class PlayerObject :
 	public Objet
 {
@@ -12,6 +15,7 @@ protected:
 	int _life;
 	float _rollingTimer=0;
 	float _invulnerabily = 0;
+
 	
 
 public:
