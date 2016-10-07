@@ -56,8 +56,7 @@ void Jeu::Routine()
 
 		MainBuffer.Reset(0x00);
 		
-		MainBuffer.DrawStars();
-		level.Draw(MainBuffer);
+		level.Refresh(MainBuffer, time);
 		MainBuffer.DrawText(std::to_string((float)(1/time)),0, 0, 0x0F);
 		MainBuffer.Draw();
 
@@ -70,15 +69,6 @@ void Jeu::Routine()
 
 		if (GetAsyncKeyState(VK_ESCAPE))
 			break;
-
-
-		MainBuffer.MoveStars(-120.f, 0, time);
-		level.Update(time);
-		level.Event(time);
-
-		
-
-		
 	}
 
 }

@@ -10,6 +10,16 @@ LevelManager::~LevelManager()
 void LevelManager::Reset() {
 	player.Alive();
 	player.SetLife(3);
+	_levelBackground = BG_STARS;
+	_levelSpeed = 100.f;
+}
+
+void LevelManager::Refresh(Buffer &buffer, float time) {
+	Draw(buffer);
+	UpdateBackground(buffer, time);
+	Update(time);
+	if(_levelState!=LVL_LOST) Event(time);
+	UpdateLevel(buffer, time);
 }
 
 void LevelManager::Update(float time) {
@@ -21,26 +31,87 @@ void LevelManager::Update(float time) {
 	ennemis.Collide(playerProjectile);
 	ennemiProjectile.Collide(player);
 	levelTimer += time;
+	enemyTimer += time;
 	if (!player.isAlive())
-		_levelState = 1;
-	if (levelTimer > 1.f) {
-		ennemis.Generate(0);
-		levelTimer = 0.f;
+		_levelState = LVL_LOST;
+	
+}
+
+void LevelManager::UpdateLevel(Buffer &buffer, float time) {
+	switch (_levelState) {
+	case LVL_START:
+		if ((int)(levelTimer*2) % 2 == 0)
+			buffer.DrawText("START!", 50, 20, 0x02);
+		if (levelTimer > 5.f) {
+			_levelState=LVL_GOING;
+			enemyTimer = 0.f;
+			levelTimer = 0.f;
+		}
+		break;
+	case LVL_GOING:
+		if (enemyTimer>1.f) {
+			ennemis.Generate(0);
+			enemyTimer = 0.f;
+		}
+		if (levelTimer > 30.f) {
+			_levelBackground = BG_WARP;
+			levelTimer = 0.f;
+			_levelState = LVL_WARPING;
+		}
+		break;
+	case LVL_WARPING:
+		_levelBackground = BG_WARP;
+		if (levelTimer < 10.f && _levelSpeed < 1000.f)
+			_levelSpeed += time * 200;
+		if (levelTimer > 10.f && _levelSpeed >100.f) {
+			_levelSpeed -= time * 200;
+		}
+		if (levelTimer > 10.f && _levelSpeed < 100.f) {
+			_levelSpeed = 100.f;
+			_levelState = LVL_START;
+			_levelBackground = BG_STARS;
+			levelTimer = 0.f;
+		}
+		break;
+	case LVL_LOST:
+		buffer.DrawText("Perdu!", 10, 5, 0x0F);
+		break;
+	default:
+		break;
+	}
+}
+
+void LevelManager::UpdateBackground(Buffer &buffer, float time) {
+	switch (_levelBackground) {
+	case BG_STARS:
+	case BG_WARP:
+		buffer.MoveStars(-_levelSpeed, 0, time);
+		break;
+	default:
+		break;
 	}
 }
 
 void LevelManager::Draw(Buffer& buffer) {
-	if (_levelState == 0) {
-		ennemis.Draw(buffer);
-		playerProjectile.Draw(buffer);
-		ennemiProjectile.Draw(buffer);
-		player.Draw(buffer);
-		DrawInterface(buffer);
+	DrawBackground(buffer);
+	ennemis.Draw(buffer);
+	playerProjectile.Draw(buffer);
+	ennemiProjectile.Draw(buffer);
+	if(player.isAlive()) player.Draw(buffer);
+	DrawInterface(buffer);
+}
+
+void LevelManager::DrawBackground(Buffer &buffer) {
+	switch (_levelBackground) {
+	case BG_STARS:
+		buffer.DrawStars();
+		break;
+	case BG_WARP:
+		buffer.DrawWarp(_levelSpeed);
+		break;
+	default:
+		break;
 	}
-	else {
-		buffer.DrawText("Perdu!", 10, 5, 0x0F);
-	}
-	
 }
 
 void LevelManager::DrawInterface(Buffer &buffer) {

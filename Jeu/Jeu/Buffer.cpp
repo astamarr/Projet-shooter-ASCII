@@ -76,7 +76,7 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 		{
 			char a;
 			a= External->_Buffer[xIterator][yIterator].Char.AsciiChar;
-		
+			if (a == ' ') continue;
 		buffer[x + xIterator][y + yIterator].Char.AsciiChar = External->_Buffer[xIterator][yIterator].Char.AsciiChar;
 		buffer[x + xIterator][y + yIterator].Attributes =  0x0a;
 		ApplyColor(x + xIterator, y + yIterator, External->_stype,a);
@@ -279,12 +279,24 @@ void Buffer::DrawStars() {
 		Update(starBuffer[i].y, starBuffer[i].x, starBuffer[i].c, starBuffer[i].color);
 }
 
+void Buffer::DrawWarp(float speed) {
+	int line_size = speed/50.f+1;
+	for (int i = 0; i < STARS_NUMBER; i++) {
+		int size = (starBuffer[i].x +line_size > SCREEN_WIDTH) ? SCREEN_WIDTH - starBuffer[i].x : line_size;
+		for (int j = 0; j < size; j++)
+			Update(starBuffer[i].y, starBuffer[i].x + j, starBuffer[i].c, starBuffer[i].color);
+	}
+}
+
 void Buffer::MoveStars(const float x, const float y, float time) {
 	starDeltaX += x*time;
 	starDeltaX += y*time;
 	for (int i = 0; i < STARS_NUMBER; i++) {
 		starBuffer[i].x += (int)starDeltaX;
-		starBuffer[i].x %= SCREEN_WIDTH;
+		if (starBuffer[i].x < 0) {
+			starBuffer[i].x = SCREEN_WIDTH+starBuffer[i].x;
+			starBuffer[i].y = rand() % SCREEN_HEIGHT;
+		}
 		starBuffer[i].y += (int)starDeltaY;
 		starBuffer[i].y %= SCREEN_HEIGHT;
 	}
