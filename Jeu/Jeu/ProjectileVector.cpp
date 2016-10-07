@@ -31,8 +31,8 @@ unsigned int ProjectileVector::AddObject(const Projectile& obj, int x, int y) {
 
 bool ProjectileVector::Collide(Objet& obj) {
 	for (auto& it : vector)
-		if (it.isAlive() && it.Collide(obj))
-			return true;
+		if (it.isAlive())
+			it.Collide(obj);
 	return false;
 }
 

@@ -24,7 +24,7 @@ Projectile::Projectile(const Projectile& cible) : Objet(cible){
 
 bool Projectile::Collide(Objet& obj) {
 	if (Objet::Collide(obj)) {
-		obj.GetHit(_damage);
+ 		obj.GetHit(_damage);
 		return true;
 	}
 	return false;

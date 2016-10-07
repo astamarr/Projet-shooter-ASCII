@@ -40,3 +40,9 @@ void PlayerObject::Shoot(ProjectileVector& proj) {
 void PlayerObject::Draw(Buffer& buffer) {
 	buffer.UpdateFromAsset( _y, _x, "player");
 }
+
+void PlayerObject::GetHit(int damage) {
+	_life -= damage;
+	if (_life <= 0)
+		Kill();
+}
