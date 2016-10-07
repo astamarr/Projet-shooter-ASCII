@@ -18,6 +18,7 @@ public:
 	void Set();
 	void Update(float time);
 	void Action(ProjectileVector& proj, float time);
+	void Draw(Buffer& buffer);
 
 };
 

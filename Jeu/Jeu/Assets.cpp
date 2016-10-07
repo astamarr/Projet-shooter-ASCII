@@ -2,6 +2,7 @@
 
 
 
+
 Assets::Assets()
 {
 	
@@ -76,16 +77,13 @@ void Assets::LoadPlayerFromFile(std::string file) {
 		}
 	}
 
-	/*
-	if (Type == "player") {
-		_RPlayer = new Ressource(file, Type, buffer, xsize, ysize);
-		_vRessources.push_back(_RPlayer);
 
-		}
+	
+		_mRessources[Type] =  new Ressource(file, Type, buffer, xsize, ysize);
 
-	*/
-		
-		_vRessources.push_back(new Ressource(file, Type, buffer, xsize, ysize));
+
+
+	
 		delete[] buffer[0];
 		delete[] buffer;
 
@@ -98,21 +96,6 @@ void Assets::LoadPlayerFromFile(std::string file) {
 }
 
 
-
-
-
-
-
 Ressource* Assets::GetAsset(string RessourceName) {
-
-	for (int Iterator = 0; Iterator < _vRessources.size(); Iterator++) {
-		
-		if (_vRessources[Iterator]->_stype == RessourceName) {
-
-			return _vRessources[Iterator];
-		}
-
-	}
-
-
+	return _mRessources[RessourceName];
 }
