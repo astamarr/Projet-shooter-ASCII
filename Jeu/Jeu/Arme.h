@@ -1,5 +1,5 @@
 #pragma once
-#include "ObjectVector.h"
+#include "ProjectileVector.h"
 #include "Projectile.h"
 
 #define WP_SHOTGUN 0
@@ -19,7 +19,7 @@ public:
 	~Arme();
 
 	void Update(float time);
-	void Shoot(ObjectVector& projBuffer, int x, int y);
+	void Shoot(ProjectileVector& projBuffer, int x, int y);
 	void ResetTimer() { _timer = 0.f; };
 };
 

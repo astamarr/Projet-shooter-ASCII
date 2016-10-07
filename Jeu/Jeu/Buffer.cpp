@@ -36,6 +36,14 @@ void Buffer::Update(int x, int y, char c, char color)
 	buffer[x][y].Attributes = color;
 }
 
+void Buffer::CheckAndUpdate(int x, int y, char c, char color)
+{
+	if (x >= 0 && y >= 0 && y < SCREEN_WIDTH && x < SCREEN_HEIGHT) {
+		buffer[x][y].Char.AsciiChar = c;
+		buffer[x][y].Attributes = color;
+	}
+}
+
 void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 
 	int xsize = External->xBufferSize;
@@ -44,8 +52,8 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 	y -= ysize / 2;
 	int xoff = (x < 0) ? -x : 0;
 	int yoff = (y < 0) ? -y : 0;
-	xsize -= ((x + xoff + xsize) >= SCREEN_WIDTH) ? (x + xoff + xsize) - SCREEN_WIDTH : 0;
-	ysize -= ((y + yoff + ysize) >= SCREEN_HEIGHT) ? (y + yoff + ysize) - SCREEN_HEIGHT : 0;
+	xsize -= ((x + xoff + xsize) >= SCREEN_HEIGHT) ? (x + xoff + xsize) - SCREEN_HEIGHT : 0;
+	ysize -= ((y + yoff + ysize) >= SCREEN_WIDTH) ? (y + yoff + ysize) - SCREEN_WIDTH : 0;
 	for (int xIterator = xoff; xIterator < xsize; xIterator++) {
 
 		for (int yIterator = yoff; yIterator < ysize; yIterator++)

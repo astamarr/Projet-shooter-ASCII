@@ -1,20 +1,21 @@
 #pragma once
 
-#include "Objet.h"
+#include "Projectile.h"
 #include <vector>
 #include "Buffer.h"
 
-class ObjectVector
+
+class ProjectileVector
 {
 private:
-	std::vector<Objet> vector;
+	std::vector<Projectile> vector;
 	unsigned int nextAvailable = 0;
 public:
-	ObjectVector(int size = 0) : vector(size) {};
-	~ObjectVector();
+	ProjectileVector(int size = 0) : vector(size) {};
+	~ProjectileVector();
 
-	unsigned int AddObject(const Objet& obj);
-	unsigned int AddObject(const Objet& obj, int x, int y);
+	unsigned int AddObject(const Projectile& obj);
+	unsigned int AddObject(const Projectile& obj, int x, int y);
 	bool Collide(const Objet& obj);
 	void SearchNext();
 	void Update(const float time);

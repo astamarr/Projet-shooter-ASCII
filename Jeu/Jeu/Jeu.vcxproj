@@ -149,9 +149,12 @@
     <ClInclude Include="Arme.h" />
     <ClInclude Include="Assets.h" />
     <ClInclude Include="Buffer.h" />
+    <ClInclude Include="Ennemi.h" />
+    <ClInclude Include="EnnemiGenerator.h" />
     <ClInclude Include="Jeu.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="NYtimer.h" />
-    <ClInclude Include="ObjectVector.h" />
+    <ClInclude Include="ProjectileVector.h" />
     <ClInclude Include="Objet.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="Projectile.h" />
@@ -163,8 +166,11 @@
     <ClCompile Include="Arme.cpp" />
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Buffer.cpp" />
+    <ClCompile Include="Ennemi.cpp" />
+    <ClCompile Include="EnnemiGenerator.cpp" />
     <ClCompile Include="Jeu.cpp" />
-    <ClCompile Include="ObjectVector.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="ProjectileVector.cpp" />
     <ClCompile Include="Objet.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="Projectile.cpp" />

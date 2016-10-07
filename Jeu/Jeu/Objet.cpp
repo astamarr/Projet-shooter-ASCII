@@ -35,6 +35,10 @@ void Objet::Move(const float x, const float y, const float time) {
 	if (_ySpeed < -_maxSpeed)_ySpeed = -_maxSpeed;
 };
 
+void Objet::Draw(Buffer& buffer) {
+	
+}
+
 void Objet::Update(const float time) {
 	float movex = _xSpeed*time;
 	float movey = _ySpeed*time;

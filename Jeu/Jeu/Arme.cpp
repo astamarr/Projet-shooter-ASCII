@@ -16,7 +16,7 @@ void Arme::Update(float time) {
 	_timer += time;
 }
 
-void Arme::Shoot(ObjectVector& projBuffer, int x, int y) {
+void Arme::Shoot(ProjectileVector& projBuffer, int x, int y) {
 	switch (_type) {
 	case WP_SHOTGUN : 
 		if (_timer > .3f) {

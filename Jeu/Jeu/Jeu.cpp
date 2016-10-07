@@ -11,10 +11,7 @@
 #include "Assets.h"
 #include "Ressource.h"
 #include "Buffer.h"
-#include "Objet.h"
-#include "PlayerObject.h"
-#include "Projectile.h"
-#include "ObjectVector.h"
+#include "LevelManager.h"
 #include "NYtimer.h";
 using namespace std;
 
@@ -24,20 +21,20 @@ int main()
 	Buffer MainBuffer;
 	NYTimer timer;
 	timer.start();
-	PlayerObject o;
-	Objet méchant;
-	ObjectVector enemies;
+
+	
+
 	float time;
-	float shootTimer = 0;
-	ObjectVector projectile;
+	
 	srand(25);
 
 	
-	Assets   testAssets;
-	Assets   testAssets2;
+	Assets testAssets;
 	testAssets.LoadPlayerFromFile("ship.txt");
 	testAssets.LoadPlayerFromFile("ship2.txt");
 
+	LevelManager level(testAssets);
+	
 	MainBuffer.InitStars();
 
 	
@@ -45,43 +42,31 @@ int main()
 	while (true) {
 
 		time = timer.getElapsedSeconds(true);
-		shootTimer += time;
+
 		MainBuffer.Reset(0x00);
 		
 		MainBuffer.DrawStars();
-		//a.Update(o.GetY(), o.GetX(), 'O', 0x00);
-		projectile.Draw(MainBuffer);
+		level.Draw(MainBuffer);
+
+		MainBuffer.Draw();
 
 
-		MainBuffer.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.GetAsset("player"));
-		MainBuffer.UpdateWithBuffer(8, 10, testAssets.GetAsset("target"));
+		//MainBuffer.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.GetAsset("player"));
+		//MainBuffer.UpdateWithBuffer(8, 10, testAssets.GetAsset("target"));
 
 
-		enemies.Draw(MainBuffer);
 
-		if (GetAsyncKeyState('Q'))
-			o.Move(-1, 0, time);
-		if (GetAsyncKeyState('D'))
-			o.Move(1, 0, time);
-		if (GetAsyncKeyState('S'))
-			o.Move(0,1, time);
-		if (GetAsyncKeyState('Z'))
-			o.Move(0,-1, time);
+
 		if (GetAsyncKeyState(VK_ESCAPE))
 			break;
-		if (GetAsyncKeyState(VK_SPACE) && shootTimer > .05f) {
-			o.Shoot(projectile);
-		}
-		o.Update(time);
-		enemies.Update(time);
-		projectile.UpdateWithBoundCheck(time);
+
 
 		MainBuffer.MoveStars(-120.f, 0, time);
+		level.Update(time);
+		level.Event(time);
 
-#ifdef _DEBUG
-		//timer.start();
-#endif
-		MainBuffer.Draw();
+		
+
 		
 	}
 
