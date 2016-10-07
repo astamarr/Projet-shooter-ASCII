@@ -56,3 +56,7 @@ Jeu/Debug/Jeu.ilk
 *.log
 Jeu/Debug/Jeu.pdb
 *.db
+Jeu/x64/Debug/Jeu.pdb
+*.ilk
+Jeu/x64/Debug/Jeu.exe
+Jeu/x64/Debug/Jeu.exe
