@@ -29,10 +29,10 @@ unsigned int ProjectileVector::AddObject(const Projectile& obj, int x, int y) {
 	return position;
 }
 
-bool ProjectileVector::Collide(const Objet& obj) {
+bool ProjectileVector::Collide(Objet& obj) {
 	for (auto& it : vector)
-		if (it.isAlive() && it.Collide(obj))
-			return true;
+		if (it.isAlive())
+			it.Collide(obj);
 	return false;
 }
 

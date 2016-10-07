@@ -17,11 +17,10 @@ Buffer::Buffer()
 	rcRegion = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
 	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,dwBufferCoord, &rcRegion);
 	
+	_Assets.LoadPlayerFromFile("test1.txt");
 	_Assets.LoadPlayerFromFile("ship.txt");
 	_Assets.LoadPlayerFromFile("ship2.txt");
-
-
-	MainMenu("test1.txt");
+	_Assets.LoadPlayerFromFile("ship3.txt");
 }
 Buffer::~Buffer()
 {
@@ -46,9 +45,18 @@ void Buffer::CheckAndUpdate(int x, int y, char c, char color)
 	}
 }
 
-void Buffer::UpdateFromAsset(int x, int y, string AssetName) {
+void Buffer::UpdateFromAsset(int x, int y, string AssetName, int lifepoints) {
 
 	UpdateWithBuffer(x,y,_Assets.GetAsset(AssetName));
+	_PlayerLife = lifepoints;
+
+
+}
+
+void Buffer::UpdateFromAsset(int x, int y, string AssetName) {
+
+	UpdateWithBuffer(x, y, _Assets.GetAsset(AssetName));
+	
 
 }
 
@@ -71,6 +79,11 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 		
 		buffer[x + xIterator][y + yIterator].Char.AsciiChar = External->_Buffer[xIterator][yIterator].Char.AsciiChar;
 		buffer[x + xIterator][y + yIterator].Attributes =  0x0a;
+		ApplyColor(x + xIterator, y + yIterator, External->_stype,a);
+
+
+
+		}
 		}
 
 
@@ -78,8 +91,119 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 
 
 
+void Buffer::ApplyColor(int x, int y, string res, char a) {
 
-}
+
+
+	if (res == "Mainscreen") {
+
+		switch (a)
+		{
+
+		case 'M':
+			buffer[x][y].Attributes = 0x04;
+			break;
+		case 'H':
+			buffer[x][y].Attributes = 0x04;
+			break;
+		case '0':
+			buffer[x][y].Attributes = 0x04;
+			break;
+		case '/':
+			buffer[x][y].Attributes = 0x04;
+			break;
+		}
+
+
+
+
+	}
+
+	if (res == "player") {
+
+		switch (a)
+		{
+
+		case '<':
+			buffer[x][y].Attributes = 0x04;
+			break;
+		case '-':
+			buffer[x][y].Attributes = 0x04;
+			break;
+
+
+		case '>':
+			buffer[x][y].Attributes = 0x01;
+			break;
+
+		case 'X':
+			buffer[x][y].Attributes = 0x01;
+			break;
+		case '=':
+			buffer[x][y].Attributes = 0x01;
+			break;
+
+		case '*':
+			if (_PlayerLife >= 3)
+			{
+				buffer[x][y].Attributes = 0x22;
+				break;
+
+			}
+			else if (_PlayerLife == 2) {
+				buffer[x][y].Attributes = 0x66;
+				break;
+			}
+
+			else {
+				buffer[x][y].Attributes = 0x44;
+				break;
+			}
+	
+		case '[':
+			buffer[x][y].Attributes = 0x06;
+			break;
+		case ']':
+			buffer[x][y].Attributes = 0x06;
+			break;
+
+		}
+	}
+
+		if (res == "target" ||res == "runner" ) {
+
+			switch (a)
+			{
+
+			case '<':
+				buffer[x][y].Attributes = 0x02;
+				break;
+			case '-':
+				buffer[x][y].Attributes = 0x04;
+				break;
+
+
+			case '>':
+				buffer[x][y].Attributes = 0x04;
+				break;
+
+			case '*':
+				buffer[x][y].Attributes = 0x66;
+				break;
+			case '[':
+				buffer[x][y].Attributes = 0x01;
+				break;
+			case ']':
+				buffer[x][y].Attributes = 0x01;
+				break;
+
+			}
+
+
+		}
+	
+	
+	}
 
 
 void Buffer::MainMenu(string file)
@@ -96,19 +220,19 @@ void Buffer::MainMenu(string file)
 		}
 		for (int iterator = 0; iterator < 70; iterator++) {
 			char a = line.at(iterator);
-			buffer[number_of_lines + 25][iterator + 50].Char.AsciiChar = a;
+			buffer[number_of_lines + 10][iterator + 10].Char.AsciiChar = a;
 
 			switch (a)
 			{
 
 			case 'M':
-				buffer[number_of_lines + 25][iterator + 50].Attributes = 0x0044;
+				buffer[number_of_lines + 10][iterator +10].Attributes = 0x0044;
 				break;
 			case 'H':
-				buffer[number_of_lines + 25][iterator + 50].Attributes = 0x44;
+				buffer[number_of_lines + 10][iterator + 10].Attributes = 0x44;
 				break;
 			case '0':
-				buffer[number_of_lines + 25][iterator + 50].Attributes = 0x74;
+				buffer[number_of_lines + 10][iterator + 10].Attributes = 0x74;
 				break;
 			}
 
@@ -119,13 +243,22 @@ void Buffer::MainMenu(string file)
 		//cout << line;
 	}
 	Draw();
-	//PlaySound(TEXT("test2.wav"), NULL, SND_FILENAME);
-	cin >> line;
+
+	char  chk = getchar();
+	PlaySound(TEXT("intro.wav"), NULL, SND_FILENAME || SND_ASYNC);
+
+//	PlaySound(NULL, 0, 0);
+	
 }
 void Buffer::Draw() {
 	//memcpy(buffer, buffer, SCREEN_WIDTH*SCREEN_HEIGHT * sizeof(CHAR_INFO));
 	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
 		dwBufferCoord, &rcRegion);
+}
+
+void Buffer::DrawText(std::string text, int x, int y, char color) {
+	for (int i = 0; i < text.size(); i++)
+		CheckAndUpdate(y, x+i, text[i], color);
 }
 
 void Buffer::Reset(int color) {

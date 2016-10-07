@@ -33,6 +33,7 @@ public:
 	int GetY() { return _y; };
 
 	bool Collide(const Objet& cible);
+	virtual void GetHit(int damage) {};
 
 	void Alive() { _exist = true; };
 	void Kill() { _exist = false; };

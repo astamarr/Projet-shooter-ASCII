@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <Windows.h>
+#include <string>
 #include <stdlib.h>
 using namespace std;
 // JE SUIS UN GRIOS COMMENTAIRE
@@ -38,6 +39,8 @@ public:
 
 
 
+	int _PlayerLife;
+
 
 
 	Buffer();
@@ -48,13 +51,16 @@ public:
 	void Update(int x, int y , char c);
 	void Update(int x, int y, char c, char color);
 	void CheckAndUpdate(int x, int y, char c, char color);
+	void UpdateFromAsset(int x, int y, string Assetname, int vie);
 	void UpdateFromAsset(int x, int y, string Assetname);
+
 	void UpdateWithBuffer(int x, int y, Ressource *  test);
+	void ApplyColor(int x, int y, string restype, char a);
 	void MainMenu(std::string file);
 
 	void InitStars();
 	void DrawStars();
-	void DrawText();
+	void DrawText(std::string text, int x, int y, char color);
 	void MoveStars(const float x, const float y, float time);
 
 	

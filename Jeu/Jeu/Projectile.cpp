@@ -2,7 +2,7 @@
 
 
 
-Projectile::Projectile(int x, int y, float xSpeed, float ySpeed)
+Projectile::Projectile(int x, int y, float xSpeed, float ySpeed, int damage)
 {
 	_x = x;
 	_y = y;
@@ -10,6 +10,7 @@ Projectile::Projectile(int x, int y, float xSpeed, float ySpeed)
 	_ySpeed = ySpeed;
 	_maxDec = 0.f;
 	_collisionRadius = 1;
+	_damage = damage;
 }
 
 
@@ -19,4 +20,12 @@ Projectile::~Projectile()
 
 Projectile::Projectile(const Projectile& cible) : Objet(cible){
 	
+}
+
+bool Projectile::Collide(Objet& obj) {
+	if (Objet::Collide(obj)) {
+ 		obj.GetHit(_damage);
+		return true;
+	}
+	return false;
 }

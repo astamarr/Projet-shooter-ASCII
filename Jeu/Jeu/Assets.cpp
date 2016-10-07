@@ -87,12 +87,6 @@ void Assets::LoadPlayerFromFile(std::string file) {
 		delete[] buffer[0];
 		delete[] buffer;
 
-
-
-
-
-
-
 }
 
 

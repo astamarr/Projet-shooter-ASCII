@@ -31,6 +31,7 @@ void EnnemiGenerator::Generate(int seed) {
 	switch (seed) {
 		case 0:
 			AddEnnemi(Ennemi(EN_BASIC, Buffer::SCREEN_WIDTH - 1, rand() % Buffer::SCREEN_HEIGHT));
+			AddEnnemi(Ennemi(EN_RUNNER, Buffer::SCREEN_WIDTH - 1, rand() % Buffer::SCREEN_HEIGHT));
 			break;
 		default:
 			break;
@@ -65,4 +66,11 @@ void EnnemiGenerator::Action(ProjectileVector& proj, float time) {
 	for (auto& it : vector)
 		if(it.isAlive())
 			it.Action(proj, time);
+}
+
+void EnnemiGenerator::Collide(ProjectileVector& proj) {
+	for (auto& it : vector) {
+		if (it.isAlive())
+			proj.Collide(it);
+	}
 }

@@ -59,3 +59,6 @@ Jeu/Debug/Jeu.pdb
 *.obj
 Jeu/Jeu/x64/Release/Assets.obj
 /Jeu/Jeu.VC.VC.opendb
+Jeu/Jeu/x64/Debug/Jeu.pch
+Jeu/Jeu/x64/Debug/vc140.pdb
+*.pdb

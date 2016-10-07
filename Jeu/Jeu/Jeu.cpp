@@ -10,15 +10,24 @@
 #include <random>
 #include "Assets.h"
 #include "Ressource.h"
-#include "Buffer.h"
+
 #include "LevelManager.h"
 #include "NYtimer.h";
+#include "Jeu.h"
 using namespace std;
 
 
-int main()
+
+Jeu::Jeu() {
+
+}
+Jeu::~Jeu() {
+
+}
+
+void Jeu::Routine()
 {
-	Buffer MainBuffer;
+
 	NYTimer timer;
 	timer.start();
 
@@ -34,6 +43,8 @@ int main()
 	testAssets.LoadPlayerFromFile("ship2.txt");
 
 	LevelManager level(testAssets);
+
+	MainMenu();
 	
 	MainBuffer.InitStars();
 
@@ -47,7 +58,7 @@ int main()
 		
 		MainBuffer.DrawStars();
 		level.Draw(MainBuffer);
-
+		MainBuffer.DrawText(std::to_string((float)(1/time)),0, 0, 0x0F);
 		MainBuffer.Draw();
 
 
@@ -72,3 +83,25 @@ int main()
 
 }
 
+
+void Jeu::MainMenu()
+{
+
+	MainBuffer.UpdateFromAsset(20, 50, "Mainscreen");
+	MainBuffer.Draw();
+	PlaySound(TEXT("part1.wav"), NULL, SND_FILENAME || SND_ASYNC);
+
+	char  chk = getchar();
+		PlaySound(NULL, 0, 0);
+	PlaySound(TEXT("part2.wav"), NULL, SND_FILENAME || SND_ASYNC);
+
+	//	PlaySound(NULL, 0, 0);
+
+}
+int main() {
+
+	Jeu Jeux;
+
+	Jeux.Routine();
+
+}

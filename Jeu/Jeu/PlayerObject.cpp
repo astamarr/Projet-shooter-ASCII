@@ -2,7 +2,7 @@
 
 
 
-PlayerObject::PlayerObject() : _arme(WP_SHOTGUN)
+PlayerObject::PlayerObject() : _arme(WP_FASTONE)
 {
 	
 
@@ -38,5 +38,11 @@ void PlayerObject::Shoot(ProjectileVector& proj) {
 }
 
 void PlayerObject::Draw(Buffer& buffer) {
-	buffer.UpdateFromAsset( _y, _x, "player");
+	buffer.UpdateFromAsset( _y, _x, "player", _life);
+}
+
+void PlayerObject::GetHit(int damage) {
+	_life -= damage;
+	if (_life <= 0)
+		Kill();
 }
