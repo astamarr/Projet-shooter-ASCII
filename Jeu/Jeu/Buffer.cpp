@@ -16,7 +16,7 @@ Buffer::Buffer()
 	dwBufferCoord = { 0, 0 };
 	rcRegion = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
 	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,dwBufferCoord, &rcRegion);
-	SetConsoleScreenBufferSize(hOutput, dwBufferSize);
+	
 
 
 	LoadFromFile("test1.txt");
