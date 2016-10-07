@@ -1,13 +1,13 @@
 #pragma once
 #include "Ressource.h"
-
+#include "Assets.h"
 #include "stdafx.h"
 #include <iostream>
 #include <Windows.h>
 #include <stdlib.h>
 using namespace std;
 // JE SUIS UN GRIOS COMMENTAIRE
-
+class Assets;
 typedef struct Etoile {
 	int x;
 	int y;
@@ -19,12 +19,15 @@ class Buffer
 {
 public:
 
-	static const int SCREEN_WIDTH = 150;
-	static const int SCREEN_HEIGHT = 50;
+	static const int SCREEN_WIDTH = 250;
+	static const int SCREEN_HEIGHT = 70;
 	static const int STARS_NUMBER = 50;
 	HANDLE hOutput;
 	CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 	COORD dwBufferCoord;
+	Assets _Assets;
+
+
 	SMALL_RECT rcRegion ;
 	COORD dwBufferSize;
 
@@ -45,8 +48,9 @@ public:
 	void Update(int x, int y , char c);
 	void Update(int x, int y, char c, char color);
 	void CheckAndUpdate(int x, int y, char c, char color);
+	void UpdateFromAsset(int x, int y, string Assetname);
 	void UpdateWithBuffer(int x, int y, Ressource *  test);
-	void LoadFromFile(std::string file);
+	void MainMenu(std::string file);
 
 	void InitStars();
 	void DrawStars();

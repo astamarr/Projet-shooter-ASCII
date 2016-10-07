@@ -17,9 +17,11 @@ Buffer::Buffer()
 	rcRegion = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
 	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,dwBufferCoord, &rcRegion);
 	
+	_Assets.LoadPlayerFromFile("ship.txt");
+	_Assets.LoadPlayerFromFile("ship2.txt");
 
 
-	LoadFromFile("test1.txt");
+	MainMenu("test1.txt");
 }
 Buffer::~Buffer()
 {
@@ -42,6 +44,12 @@ void Buffer::CheckAndUpdate(int x, int y, char c, char color)
 		buffer[x][y].Char.AsciiChar = c;
 		buffer[x][y].Attributes = color;
 	}
+}
+
+void Buffer::UpdateFromAsset(int x, int y, string AssetName) {
+
+	UpdateWithBuffer(x,y,_Assets.GetAsset(AssetName));
+
 }
 
 void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
@@ -74,7 +82,7 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 }
 
 
-void Buffer::LoadFromFile(string file)
+void Buffer::MainMenu(string file)
 {
 	ifstream infile(file, ifstream::in);
 	int number_of_lines = 0;
@@ -86,7 +94,7 @@ void Buffer::LoadFromFile(string file)
 		if (line.length() > SizeMaxOfLine) {
 			SizeMaxOfLine = line.length();
 		}
-		for (int iterator = 0; iterator < 71; iterator++) {
+		for (int iterator = 0; iterator < 70; iterator++) {
 			char a = line.at(iterator);
 			buffer[number_of_lines + 25][iterator + 50].Char.AsciiChar = a;
 

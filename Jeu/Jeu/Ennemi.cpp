@@ -48,3 +48,12 @@ void Ennemi::Action(ProjectileVector& proj, float time) {
 		break;
 	}
 }
+
+
+
+
+void Ennemi::Draw(Buffer& buffer) {
+	buffer.UpdateFromAsset(_y, _x, "target");
+}
+
+
