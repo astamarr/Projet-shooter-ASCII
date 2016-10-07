@@ -10,6 +10,9 @@ Ennemi::Ennemi(int type, int x, int y) : _type(type) {
 	SetPosition(x, y);
 	Alive();
 	Set();
+
+
+
 }
 
 Ennemi::~Ennemi()

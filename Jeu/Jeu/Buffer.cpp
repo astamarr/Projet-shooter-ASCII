@@ -17,11 +17,9 @@ Buffer::Buffer()
 	rcRegion = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
 	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,dwBufferCoord, &rcRegion);
 	
+	_Assets.LoadPlayerFromFile("test1.txt");
 	_Assets.LoadPlayerFromFile("ship.txt");
 	_Assets.LoadPlayerFromFile("ship2.txt");
-
-
-	MainMenu("test1.txt");
 }
 Buffer::~Buffer()
 {
@@ -71,6 +69,24 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 		
 		buffer[x + xIterator][y + yIterator].Char.AsciiChar = External->_Buffer[xIterator][yIterator].Char.AsciiChar;
 		buffer[x + xIterator][y + yIterator].Attributes =  0x0a;
+
+		if (External->_stype == "Mainscreen") {
+
+			switch (a)
+			{
+
+			case 'M':
+				buffer[x + xIterator][y + yIterator].Attributes = 0x0044;
+				break;
+			case 'H':
+				buffer[x + xIterator][y + yIterator].Attributes = 0x44;
+				break;
+			case '0':
+				buffer[x + xIterator][y + yIterator].Attributes = 0x74;
+				break;
+			}
+
+		}
 		}
 
 
@@ -96,19 +112,19 @@ void Buffer::MainMenu(string file)
 		}
 		for (int iterator = 0; iterator < 70; iterator++) {
 			char a = line.at(iterator);
-			buffer[number_of_lines + 25][iterator + 50].Char.AsciiChar = a;
+			buffer[number_of_lines + 10][iterator + 10].Char.AsciiChar = a;
 
 			switch (a)
 			{
 
 			case 'M':
-				buffer[number_of_lines + 25][iterator + 50].Attributes = 0x0044;
+				buffer[number_of_lines + 10][iterator +10].Attributes = 0x0044;
 				break;
 			case 'H':
-				buffer[number_of_lines + 25][iterator + 50].Attributes = 0x44;
+				buffer[number_of_lines + 10][iterator + 10].Attributes = 0x44;
 				break;
 			case '0':
-				buffer[number_of_lines + 25][iterator + 50].Attributes = 0x74;
+				buffer[number_of_lines + 10][iterator + 10].Attributes = 0x74;
 				break;
 			}
 
@@ -119,8 +135,12 @@ void Buffer::MainMenu(string file)
 		//cout << line;
 	}
 	Draw();
-	//PlaySound(TEXT("test2.wav"), NULL, SND_FILENAME);
-	cin >> line;
+
+	char  chk = getchar();
+	PlaySound(TEXT("intro.wav"), NULL, SND_FILENAME || SND_ASYNC);
+
+//	PlaySound(NULL, 0, 0);
+	
 }
 void Buffer::Draw() {
 	//memcpy(buffer, buffer, SCREEN_WIDTH*SCREEN_HEIGHT * sizeof(CHAR_INFO));
