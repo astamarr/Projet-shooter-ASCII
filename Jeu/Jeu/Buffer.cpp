@@ -20,6 +20,7 @@ Buffer::Buffer()
 	_Assets.LoadPlayerFromFile("test1.txt");
 	_Assets.LoadPlayerFromFile("ship.txt");
 	_Assets.LoadPlayerFromFile("ship2.txt");
+	_Assets.LoadPlayerFromFile("ship3.txt");
 }
 Buffer::~Buffer()
 {
@@ -44,9 +45,18 @@ void Buffer::CheckAndUpdate(int x, int y, char c, char color)
 	}
 }
 
-void Buffer::UpdateFromAsset(int x, int y, string AssetName) {
+void Buffer::UpdateFromAsset(int x, int y, string AssetName, int lifepoints) {
 
 	UpdateWithBuffer(x,y,_Assets.GetAsset(AssetName));
+	_PlayerLife = lifepoints;
+
+
+}
+
+void Buffer::UpdateFromAsset(int x, int y, string AssetName) {
+
+	UpdateWithBuffer(x, y, _Assets.GetAsset(AssetName));
+	
 
 }
 
@@ -134,8 +144,22 @@ void Buffer::ApplyColor(int x, int y, string res, char a) {
 			break;
 
 		case '*':
-			buffer[x][y].Attributes = 0x06;
-			break;
+			if (_PlayerLife >= 3)
+			{
+				buffer[x][y].Attributes = 0x22;
+				break;
+
+			}
+			else if (_PlayerLife == 2) {
+				buffer[x][y].Attributes = 0x66;
+				break;
+			}
+
+			else {
+				buffer[x][y].Attributes = 0x44;
+				break;
+			}
+	
 		case '[':
 			buffer[x][y].Attributes = 0x06;
 			break;
@@ -146,7 +170,7 @@ void Buffer::ApplyColor(int x, int y, string res, char a) {
 		}
 	}
 
-		if (res == "target") {
+		if (res == "target" ||res == "runner" ) {
 
 			switch (a)
 			{
@@ -164,13 +188,13 @@ void Buffer::ApplyColor(int x, int y, string res, char a) {
 				break;
 
 			case '*':
-				buffer[x][y].Attributes = 0x06;
+				buffer[x][y].Attributes = 0x66;
 				break;
 			case '[':
-				buffer[x][y].Attributes = 0x06;
+				buffer[x][y].Attributes = 0x01;
 				break;
 			case ']':
-				buffer[x][y].Attributes = 0x06;
+				buffer[x][y].Attributes = 0x01;
 				break;
 
 			}

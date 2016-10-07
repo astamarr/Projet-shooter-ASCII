@@ -39,6 +39,8 @@ public:
 
 
 
+	int _PlayerLife;
+
 
 
 	Buffer();
@@ -49,7 +51,9 @@ public:
 	void Update(int x, int y , char c);
 	void Update(int x, int y, char c, char color);
 	void CheckAndUpdate(int x, int y, char c, char color);
+	void UpdateFromAsset(int x, int y, string Assetname, int vie);
 	void UpdateFromAsset(int x, int y, string Assetname);
+
 	void UpdateWithBuffer(int x, int y, Ressource *  test);
 	void ApplyColor(int x, int y, string restype, char a);
 	void MainMenu(std::string file);
