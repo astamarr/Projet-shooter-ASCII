@@ -25,6 +25,7 @@ void LevelManager::Draw(Buffer& buffer) {
 	playerProjectile.Draw(buffer);
 	ennemiProjectile.Draw(buffer);
 	player.Draw(buffer);
+	
 }
 
 void LevelManager::Event(float time) {

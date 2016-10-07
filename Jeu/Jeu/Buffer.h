@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <Windows.h>
+#include <string>
 #include <stdlib.h>
 using namespace std;
 // JE SUIS UN GRIOS COMMENTAIRE
@@ -54,7 +55,7 @@ public:
 
 	void InitStars();
 	void DrawStars();
-	void DrawText();
+	void DrawText(std::string text, int x, int y, char color);
 	void MoveStars(const float x, const float y, float time);
 
 	

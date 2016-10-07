@@ -47,7 +47,7 @@ int main()
 		
 		MainBuffer.DrawStars();
 		level.Draw(MainBuffer);
-
+		MainBuffer.DrawText(std::to_string((float)(1/time)),0, 0, 0x0F);
 		MainBuffer.Draw();
 
 

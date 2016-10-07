@@ -128,6 +128,11 @@ void Buffer::Draw() {
 		dwBufferCoord, &rcRegion);
 }
 
+void Buffer::DrawText(std::string text, int x, int y, char color) {
+	for (int i = 0; i < text.size(); i++)
+		CheckAndUpdate(y, x+i, text[i], color);
+}
+
 void Buffer::Reset(int color) {
 	memset(buffer, color, SCREEN_HEIGHT*SCREEN_WIDTH*sizeof(CHAR_INFO));
 }
