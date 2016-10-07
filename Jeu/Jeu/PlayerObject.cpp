@@ -27,9 +27,9 @@ void PlayerObject::Update(float time)
 		_x = 0;
 	if (_y < 0)
 		_y = 0;
-	if (_x > Buffer::SCREEN_WIDTH-1)
+	if (_x >= Buffer::SCREEN_WIDTH)
 		_x = Buffer::SCREEN_WIDTH-1;
-	if (_y > Buffer::SCREEN_HEIGHT-1)
+	if (_y >= Buffer::SCREEN_HEIGHT)
 		_y = Buffer::SCREEN_HEIGHT - 1;
 }
 

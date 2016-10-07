@@ -12,8 +12,12 @@ EnnemiGenerator::~EnnemiGenerator()
 }
 
 void EnnemiGenerator::Update(float time) {
-	for(auto& it : vector)
-		it.Update(time);
+	for (auto& it : vector) {
+		if (it.isAlive())
+ 			it.Update(time);
+		if (it.GetX() < 0 || it.GetY() < 0 || it.GetX() >= Buffer::SCREEN_WIDTH || it.GetY() >= Buffer::SCREEN_HEIGHT)
+			it.Kill();
+	}
 }
 
 bool EnnemiGenerator::Collide(Objet& cible) {
@@ -26,7 +30,7 @@ bool EnnemiGenerator::Collide(Objet& cible) {
 void EnnemiGenerator::Generate(int seed) {
 	switch (seed) {
 		case 0:
-
+			AddEnnemi(Ennemi(EN_BASIC, Buffer::SCREEN_WIDTH - 1, rand() % Buffer::SCREEN_HEIGHT));
 			break;
 		default:
 			break;
@@ -53,5 +57,12 @@ void EnnemiGenerator::SearchNext() {
 
 void EnnemiGenerator::Draw(Buffer& buffer) {
 	for (auto& it : vector)
-		it.Draw(buffer);
+		if(it.isAlive())
+			it.Draw(buffer);
+}
+
+void EnnemiGenerator::Action(ProjectileVector& proj, float time) {
+	for (auto& it : vector)
+		if(it.isAlive())
+			it.Action(proj, time);
 }

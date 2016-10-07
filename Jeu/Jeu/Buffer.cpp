@@ -33,6 +33,14 @@ void Buffer::Update(int x, int y, char c, char color)
 	buffer[x][y].Attributes = color;
 }
 
+void Buffer::CheckAndUpdate(int x, int y, char c, char color)
+{
+	if (x >= 0 && y >= 0 && y < SCREEN_WIDTH && x < SCREEN_HEIGHT) {
+		buffer[x][y].Char.AsciiChar = c;
+		buffer[x][y].Attributes = color;
+	}
+}
+
 void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 
 	int xsize = External->xBufferSize;

@@ -50,6 +50,7 @@ int main()
 
 		if (GetAsyncKeyState(VK_ESCAPE))
 			break;
+
 		a.MoveStars(-120.f, 0, time);
 		level.Update(time);
 		level.Event(time);

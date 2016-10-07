@@ -19,9 +19,9 @@ class Buffer
 {
 public:
 
-	static const int SCREEN_WIDTH = 200;
-	static const int SCREEN_HEIGHT = 200;
-	static const int STARS_NUMBER = 200;
+	static const int SCREEN_WIDTH = 150;
+	static const int SCREEN_HEIGHT = 50;
+	static const int STARS_NUMBER = 50;
 	HANDLE hOutput;
 	CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 	COORD dwBufferCoord;
@@ -44,6 +44,7 @@ public:
 	void Reset(int color);
 	void Update(int x, int y , char c);
 	void Update(int x, int y, char c, char color);
+	void CheckAndUpdate(int x, int y, char c, char color);
 	void UpdateWithBuffer(int x, int y, Ressource *  test);
 	void LoadFromFile(std::string file);
 

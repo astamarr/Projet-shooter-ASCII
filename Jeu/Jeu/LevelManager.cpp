@@ -6,16 +6,21 @@ LevelManager::LevelManager()
 {
 }
 
-
 LevelManager::~LevelManager()
 {
 }
 
 void LevelManager::Update(float time) {
 	ennemis.Update(time);
+	ennemis.Action(ennemiProjectile, time);
 	playerProjectile.UpdateWithBoundCheck(time);
 	ennemiProjectile.UpdateWithBoundCheck(time);
 	player.Update(time);
+	levelTimer += time;
+	if (levelTimer > 1.f) {
+		ennemis.Generate(0);
+		levelTimer = 0.f;
+	}
 }
 
 void LevelManager::Draw(Buffer& buffer) {

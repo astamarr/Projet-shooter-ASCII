@@ -19,5 +19,6 @@ public:
 	unsigned int AddEnnemi(const Ennemi& ennemi);
 	void SearchNext();
 	void Draw(Buffer& buffer);
+	void Action(ProjectileVector& proj, float time);
 };
 

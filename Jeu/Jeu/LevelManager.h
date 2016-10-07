@@ -14,6 +14,8 @@ private:
 	ProjectileVector ennemiProjectile;
 	PlayerObject player;
 
+	float levelTimer = 0;
+
 
 public:
 	LevelManager();
