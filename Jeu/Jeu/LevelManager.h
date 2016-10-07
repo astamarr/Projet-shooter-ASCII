@@ -22,6 +22,7 @@ private:
 	ProjectileVector playerProjectile;
 	ProjectileVector ennemiProjectile;
 	PlayerObject player;
+	float _boostTimer = 0.f;
 
 	Assets &_assets;
 

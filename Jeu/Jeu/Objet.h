@@ -24,10 +24,16 @@ public:
 	void Move(const float x,const float y, const float time);
 
 	void Update(const float time);
-	void Draw(Buffer& buffer);
+	virtual void Draw(Buffer& buffer);
 
 	void SetPosition(const int x, const int y) { _x = x; _y = y; };
 	void MovePosition(const int x, const int y) { _x += x; _y += y; };
+
+	void SetMaxSpeed(float speed) { _maxSpeed = speed; };
+	void SetXSpeed(float speed) { _xSpeed = speed; };
+	void SetYSpeed(float speed) { _ySpeed = speed; };
+	void SetMaxAcc(float acc) { _maxAcc = acc; };
+	void SetMaxDec(float dec) { _maxDec = dec; };
 
 	int GetX() { return _x; };
 	int GetY() { return _y; };
@@ -35,7 +41,7 @@ public:
 	bool Collide(const Objet& cible);
 	virtual void GetHit(int damage) {};
 
-	void Alive() { _exist = true; };
+	virtual void Alive() { _exist = true; };
 	void Kill() { _exist = false; };
 	bool isAlive() { return _exist; };
 };

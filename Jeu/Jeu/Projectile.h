@@ -23,6 +23,7 @@ public:
 	
 	bool Collide(Objet& obj);
 
+	void Draw(Buffer &buffer);
 
 };
 

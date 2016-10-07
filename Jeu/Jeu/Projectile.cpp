@@ -30,3 +30,7 @@ bool Projectile::Collide(Objet& obj) {
 	}
 	return false;
 }
+
+void Projectile::Draw(Buffer &buffer) {
+	buffer.CheckAndUpdate(_y, _x, '-', 0xEC);
+}

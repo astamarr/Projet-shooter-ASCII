@@ -49,8 +49,8 @@ void ProjectileVector::Update(const float time) {
 
 void ProjectileVector::Draw(Buffer& buffer) {
 	for (auto& it : vector) {
-		if(it.isAlive())
-			buffer.CheckAndUpdate(it.GetY(), it.GetX(), '+', 0x0F);
+		if (it.isAlive())
+			it.Draw(buffer);
 	}
 }
 

@@ -10,6 +10,9 @@ LevelManager::~LevelManager()
 void LevelManager::Reset() {
 	player.Alive();
 	player.SetLife(3);
+	player.SetMaxSpeed(50.f);
+	player.SetMaxAcc(5.f);
+	player.SetMaxDec(5.f);
 	_levelBackground = BG_STARS;
 	_levelSpeed = 100.f;
 }
@@ -32,6 +35,7 @@ void LevelManager::Update(float time) {
 	ennemiProjectile.Collide(player);
 	levelTimer += time;
 	enemyTimer += time;
+	_boostTimer += time;
 	if (!player.isAlive())
 		_levelState = LVL_LOST;
 	
@@ -120,17 +124,25 @@ void LevelManager::DrawInterface(Buffer &buffer) {
 
 void LevelManager::Event(float time) {
 	if (GetAsyncKeyState('Q'))
-		player.Move(-1, 0, time);
+		player.Move(-1,0,time);
 	if (GetAsyncKeyState('D'))
-		player.Move(1, 0, time);
+		player.Move(1,0,time);
 	if (GetAsyncKeyState('S'))
-		player.Move(0, 1, time);
+		player.Move(0,1,time);
 	if (GetAsyncKeyState('Z'))
-		player.Move(0, -1, time);
+		player.Move(0,-1,time);
 	if (GetAsyncKeyState(VK_SHIFT))
 		player.RollWeapon();
-	if (GetAsyncKeyState(VK_SPACE)) {
+	if (GetAsyncKeyState(VK_SPACE)) 
 		player.Shoot(playerProjectile);
+
+	if (GetAsyncKeyState(VK_DOWN) && _boostTimer > 5.f) {
+		player.SetYSpeed(100.f);
+		_boostTimer = 0;
+	}
+	if (GetAsyncKeyState(VK_UP)) {
+		player.SetYSpeed(-100.f);
+		_boostTimer = 0;
 	}
 }
 
