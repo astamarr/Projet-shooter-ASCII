@@ -16,7 +16,7 @@ public:
 
 	unsigned int AddObject(const Projectile& obj);
 	unsigned int AddObject(const Projectile& obj, int x, int y);
-	bool Collide(const Objet& obj);
+	bool Collide(Objet& obj);
 	void SearchNext();
 	void Update(const float time);
 	size_t size() { return vector.size(); };

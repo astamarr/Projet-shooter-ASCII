@@ -2,7 +2,7 @@
 
 
 
-PlayerObject::PlayerObject() : _arme(WP_SHOTGUN)
+PlayerObject::PlayerObject() : _arme(WP_FASTONE)
 {
 	
 

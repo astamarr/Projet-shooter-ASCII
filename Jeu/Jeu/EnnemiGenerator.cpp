@@ -31,6 +31,7 @@ void EnnemiGenerator::Generate(int seed) {
 	switch (seed) {
 		case 0:
 			AddEnnemi(Ennemi(EN_BASIC, Buffer::SCREEN_WIDTH - 1, rand() % Buffer::SCREEN_HEIGHT));
+			AddEnnemi(Ennemi(EN_RUNNER, Buffer::SCREEN_WIDTH - 1, rand() % Buffer::SCREEN_HEIGHT));
 			break;
 		default:
 			break;
