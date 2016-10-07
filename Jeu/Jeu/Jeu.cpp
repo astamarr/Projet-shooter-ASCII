@@ -40,7 +40,7 @@ int main()
 
 	MainBuffer.InitStars();
 
-
+	
 
 	while (true) {
 
@@ -54,7 +54,7 @@ int main()
 
 
 		MainBuffer.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.GetAsset("player"));
-		MainBuffer.UpdateWithBuffer(10, 50, testAssets.GetAsset("target"));
+		MainBuffer.UpdateWithBuffer(8, 10, testAssets.GetAsset("target"));
 
 
 		enemies.Draw(MainBuffer);

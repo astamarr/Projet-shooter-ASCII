@@ -29,7 +29,7 @@ Ressource::Ressource(string name, string type, CHAR_INFO ** ResBuffer,const int 
 
 		}
 	}
-	memcpy(_Buffer[0], ResBuffer[0], xBufferSize * yBufferSize * sizeof _Buffer[0][0]);
+	//memcpy(_Buffer[0], ResBuffer[0], xBufferSize * yBufferSize * sizeof _Buffer[0][0]);
 
 	
 
