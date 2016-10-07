@@ -1,4 +1,4 @@
-21
+24
 70
 Mainscreen
        `                          '    . '                                    
@@ -22,3 +22,6 @@ _-"   .       '  +  .              .        ,//////0\ | /00HHHHHHHMMMMM
                            .   '      ,///////000000000HHHHHHHHMMMMMMMM     
        +         .        '   .    .  ////////000000000HHHHHHHHMMMMMMMM     
 ------------------------- push ENTER key to begin -----------------------
+MOVE : ZQSD                                                                         
+FIRE : SPACE                                                                     
+SWITCH WEAPON : SHIFT                                                                
