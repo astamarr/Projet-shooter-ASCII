@@ -56,3 +56,5 @@ Jeu/Debug/Jeu.ilk
 *.log
 Jeu/Debug/Jeu.pdb
 *.db
+*.obj
+Jeu/Jeu/x64/Release/Assets.obj

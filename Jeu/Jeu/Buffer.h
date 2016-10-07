@@ -50,6 +50,7 @@ public:
 
 	void InitStars();
 	void DrawStars();
+	void DrawText();
 	void MoveStars(const float x, const float y, float time);
 
 	

@@ -16,6 +16,9 @@ Buffer::Buffer()
 	dwBufferCoord = { 0, 0 };
 	rcRegion = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
 	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,dwBufferCoord, &rcRegion);
+	SetConsoleScreenBufferSize(hOutput, dwBufferSize);
+
+
 	LoadFromFile("test1.txt");
 }
 Buffer::~Buffer()
@@ -83,10 +86,26 @@ void Buffer::LoadFromFile(string file)
 		if (line.length() > SizeMaxOfLine) {
 			SizeMaxOfLine = line.length();
 		}
-		for (int iterator = 0; iterator < 70; iterator++) {
+		for (int iterator = 0; iterator < 71; iterator++) {
 			char a = line.at(iterator);
-			buffer[number_of_lines][iterator].Char.AsciiChar = a;
-			buffer[number_of_lines][iterator].Attributes = 0x4a;
+			buffer[number_of_lines + 25][iterator + 50].Char.AsciiChar = a;
+
+			switch (a)
+			{
+
+			case 'M':
+				buffer[number_of_lines + 25][iterator + 50].Attributes = 0x0044;
+				break;
+			case 'H':
+				buffer[number_of_lines + 25][iterator + 50].Attributes = 0x44;
+				break;
+			case '0':
+				buffer[number_of_lines + 25][iterator + 50].Attributes = 0x74;
+				break;
+			}
+
+		
+			
 		}
 		++number_of_lines;
 		//cout << line;

@@ -18,7 +18,7 @@ using namespace std;
 
 int main()
 {
-	Buffer a;
+	Buffer MainBuffer;
 	NYTimer timer;
 	timer.start();
 	LevelManager level;
@@ -30,15 +30,17 @@ int main()
 	Assets   testAssets;
 	Assets   testAssets2;
 	testAssets.LoadPlayerFromFile("ship.txt");
-	testAssets2.LoadPlayerFromFile("ship2.txt");
+	testAssets.LoadPlayerFromFile("ship2.txt");
 
-	a.InitStars();
+	MainBuffer.InitStars();
 
-
+	
 
 	while (true) {
 
 		time = timer.getElapsedSeconds(true);
+		shootTimer += time;
+		a.Reset(0x00);
 		
 		a.Reset(0x00);
 		a.DrawStars();
