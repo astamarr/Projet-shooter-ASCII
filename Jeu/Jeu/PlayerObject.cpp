@@ -38,5 +38,5 @@ void PlayerObject::Shoot(ProjectileVector& proj) {
 }
 
 void PlayerObject::Draw(Buffer& buffer) {
-	buffer.Update( _y, _x, 'X', 0x0F);
+	buffer.UpdateFromAsset( _y, _x, "player");
 }
