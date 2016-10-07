@@ -20,6 +20,7 @@ Buffer::Buffer()
 	_Assets.LoadPlayerFromFile("test1.txt");
 	_Assets.LoadPlayerFromFile("ship.txt");
 	_Assets.LoadPlayerFromFile("ship2.txt");
+	_Assets.LoadPlayerFromFile("ship3.txt");
 }
 Buffer::~Buffer()
 {
@@ -44,9 +45,18 @@ void Buffer::CheckAndUpdate(int x, int y, char c, char color)
 	}
 }
 
-void Buffer::UpdateFromAsset(int x, int y, string AssetName) {
+void Buffer::UpdateFromAsset(int x, int y, string AssetName, int lifepoints) {
 
 	UpdateWithBuffer(x,y,_Assets.GetAsset(AssetName));
+	_PlayerLife = lifepoints;
+
+
+}
+
+void Buffer::UpdateFromAsset(int x, int y, string AssetName) {
+
+	UpdateWithBuffer(x, y, _Assets.GetAsset(AssetName));
+	
 
 }
 
@@ -69,22 +79,9 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 		
 		buffer[x + xIterator][y + yIterator].Char.AsciiChar = External->_Buffer[xIterator][yIterator].Char.AsciiChar;
 		buffer[x + xIterator][y + yIterator].Attributes =  0x0a;
+		ApplyColor(x + xIterator, y + yIterator, External->_stype,a);
 
-		if (External->_stype == "Mainscreen") {
 
-			switch (a)
-			{
-
-			case 'M':
-				buffer[x + xIterator][y + yIterator].Attributes = 0x0044;
-				break;
-			case 'H':
-				buffer[x + xIterator][y + yIterator].Attributes = 0x44;
-				break;
-			case '0':
-				buffer[x + xIterator][y + yIterator].Attributes = 0x74;
-				break;
-			}
 
 		}
 		}
@@ -94,8 +91,119 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 
 
 
+void Buffer::ApplyColor(int x, int y, string res, char a) {
 
-}
+
+
+	if (res == "Mainscreen") {
+
+		switch (a)
+		{
+
+		case 'M':
+			buffer[x][y].Attributes = 0x04;
+			break;
+		case 'H':
+			buffer[x][y].Attributes = 0x04;
+			break;
+		case '0':
+			buffer[x][y].Attributes = 0x04;
+			break;
+		case '/':
+			buffer[x][y].Attributes = 0x04;
+			break;
+		}
+
+
+
+
+	}
+
+	if (res == "player") {
+
+		switch (a)
+		{
+
+		case '<':
+			buffer[x][y].Attributes = 0x04;
+			break;
+		case '-':
+			buffer[x][y].Attributes = 0x04;
+			break;
+
+
+		case '>':
+			buffer[x][y].Attributes = 0x01;
+			break;
+
+		case 'X':
+			buffer[x][y].Attributes = 0x01;
+			break;
+		case '=':
+			buffer[x][y].Attributes = 0x01;
+			break;
+
+		case '*':
+			if (_PlayerLife >= 3)
+			{
+				buffer[x][y].Attributes = 0x22;
+				break;
+
+			}
+			else if (_PlayerLife == 2) {
+				buffer[x][y].Attributes = 0x66;
+				break;
+			}
+
+			else {
+				buffer[x][y].Attributes = 0x44;
+				break;
+			}
+	
+		case '[':
+			buffer[x][y].Attributes = 0x06;
+			break;
+		case ']':
+			buffer[x][y].Attributes = 0x06;
+			break;
+
+		}
+	}
+
+		if (res == "target" ||res == "runner" ) {
+
+			switch (a)
+			{
+
+			case '<':
+				buffer[x][y].Attributes = 0x02;
+				break;
+			case '-':
+				buffer[x][y].Attributes = 0x04;
+				break;
+
+
+			case '>':
+				buffer[x][y].Attributes = 0x04;
+				break;
+
+			case '*':
+				buffer[x][y].Attributes = 0x66;
+				break;
+			case '[':
+				buffer[x][y].Attributes = 0x01;
+				break;
+			case ']':
+				buffer[x][y].Attributes = 0x01;
+				break;
+
+			}
+
+
+		}
+	
+	
+	}
 
 
 void Buffer::MainMenu(string file)

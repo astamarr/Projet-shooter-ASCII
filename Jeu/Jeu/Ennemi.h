@@ -12,6 +12,7 @@ class Ennemi :
 {
 private:
 	int _type;
+	string LinkedRes;
 
 public:
 	Ennemi();

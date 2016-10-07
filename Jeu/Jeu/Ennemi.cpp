@@ -28,12 +28,14 @@ void Ennemi::Set() {
 		_maxAcc = 10.f;
 		_maxDec = 10.f;
 		_life = 1;
+		LinkedRes = "target";
 		break;
 	case EN_RUNNER:
 		_arme.SetType(WP_SHOTGUN);
 		_arme.SetAngle(180.f);
 		_collisionRadius = 2;
 		_maxSpeed = 75.f;
+		LinkedRes = "runner";
 		_maxAcc = 25.f;
 		_maxDec = 25.f;
 		_life = 1;
@@ -74,7 +76,7 @@ void Ennemi::Action(ProjectileVector& proj, float time) {
 
 
 void Ennemi::Draw(Buffer& buffer) {
-	buffer.UpdateFromAsset(_y, _x, "target");
+	buffer.UpdateFromAsset(_y, _x, LinkedRes);
 }
 
 
