@@ -2,9 +2,6 @@
 
 
 
-LevelManager::LevelManager()
-{
-}
 
 LevelManager::~LevelManager()
 {
