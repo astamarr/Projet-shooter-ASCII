@@ -42,6 +42,7 @@ void Arme::Shoot(ProjectileVector& projBuffer, int x, int y) {
 			ResetTimer();
 		}
 	default:
+		projBuffer.AddObject(Projectile(x, y - 1, -90.f, 0));
 		break;
 	}
 }
