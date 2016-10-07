@@ -51,6 +51,7 @@ public:
 	void CheckAndUpdate(int x, int y, char c, char color);
 	void UpdateFromAsset(int x, int y, string Assetname);
 	void UpdateWithBuffer(int x, int y, Ressource *  test);
+	void ApplyColor(int x, int y, string restype, char a);
 	void MainMenu(std::string file);
 
 	void InitStars();
