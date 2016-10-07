@@ -21,17 +21,20 @@ int main()
 	Buffer MainBuffer;
 	NYTimer timer;
 	timer.start();
-	LevelManager level;
+
+	
+
 	float time;
 	
 	srand(25);
 
 	
-	Assets   testAssets;
-	Assets   testAssets2;
+	Assets testAssets;
 	testAssets.LoadPlayerFromFile("ship.txt");
 	testAssets.LoadPlayerFromFile("ship2.txt");
 
+	LevelManager level(testAssets);
+	
 	MainBuffer.InitStars();
 
 	
@@ -39,23 +42,31 @@ int main()
 	while (true) {
 
 		time = timer.getElapsedSeconds(true);
-		shootTimer += time;
-		a.Reset(0x00);
+
+		MainBuffer.Reset(0x00);
 		
-		a.Reset(0x00);
-		a.DrawStars();
-		level.Draw(a);
-#ifdef _DEBUG
-		//timer.start();
-#endif
-		a.Draw();
+		MainBuffer.DrawStars();
+		level.Draw(MainBuffer);
+
+		MainBuffer.Draw();
+
+
+		//MainBuffer.UpdateWithBuffer(o.GetY(), o.GetX(), testAssets.GetAsset("player"));
+		//MainBuffer.UpdateWithBuffer(8, 10, testAssets.GetAsset("target"));
+
+
+
 
 		if (GetAsyncKeyState(VK_ESCAPE))
 			break;
 
-		a.MoveStars(-120.f, 0, time);
+
+		MainBuffer.MoveStars(-120.f, 0, time);
 		level.Update(time);
 		level.Event(time);
+
+		
+
 		
 	}
 
