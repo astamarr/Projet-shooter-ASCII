@@ -54,7 +54,8 @@ void LevelManager::UpdateLevel(Buffer &buffer, float time) {
 	switch (_levelState) {
 	case LVL_START:
 		if ((int)(levelTimer*2) % 2 == 0)
-			buffer.DrawText("START!", 50, 20, 0x02);
+			buffer.DrawText("SECTOR" + to_string(CurrentSector) + ".... FIGHT", 50, 20, 0x02);
+	
 		if (levelTimer > 5.f) {
 			_levelState=LVL_GOING;
 			enemyTimer = 0.f;
@@ -66,14 +67,17 @@ void LevelManager::UpdateLevel(Buffer &buffer, float time) {
 			ennemis.Generate(0);
 			enemyTimer = 0.f;
 		}
-		if (levelTimer > 30.f) {
+		if (levelTimer > 20.f) {
 			_levelBackground = BG_WARP;
 			levelTimer = 0.f;
 			_levelState = LVL_WARPING;
+			
+
 		}
 		break;
 	case LVL_WARPING:
 		_levelBackground = BG_WARP;
+	
 		if (levelTimer < 10.f && _levelSpeed < 1000.f)
 			_levelSpeed += time * 200;
 		if (levelTimer > 10.f && _levelSpeed >100.f) {
@@ -82,13 +86,15 @@ void LevelManager::UpdateLevel(Buffer &buffer, float time) {
 		if (levelTimer > 10.f && _levelSpeed < 100.f) {
 			_levelSpeed = 100.f;
 			_levelState = LVL_START;
+			++CurrentSector;
 			_levelBackground = BG_STARS;
 			levelTimer = 0.f;
 		}
 		break;
 	case LVL_LOST:
 		//buffer.DrawText("Perdu!", 10, 5, 0x0F);
-		
+		buffer.UpdateFromAsset(15, 50, "gameover");
+		buffer.DrawText(to_string(CurrentSector - 1) + "SECTOR CLEANED", 60, 20, 0x02);
 		break;
 	default:
 		break;
