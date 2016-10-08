@@ -53,6 +53,8 @@ void Jeu::Routine()
 	while (true) {
 
 		time = timer.getElapsedSeconds(true);
+		if (time > 1.f)
+			time = 1.f;
 
 		MainBuffer.Reset(0x00);
 		

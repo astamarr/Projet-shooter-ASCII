@@ -44,8 +44,9 @@ void LevelManager::Update(float time) {
 	enemyTimer += time;
 	_boostTimer += time;
 	_menuTimer += time;
-	if (!player.isAlive())
+	if (!player.isAlive()) {
 		_levelState = LVL_LOST;
+	}
 	
 }
 
@@ -164,6 +165,7 @@ void LevelManager::Event(float time) {
 		player.SetYSpeed(-100.f);
 		_boostTimer = 0;
 	}
+	GetAsyncKeyState(VK_RETURN);
 }
 
 void LevelManager::MenuEvent(float time) {

@@ -74,3 +74,8 @@ void EnnemiGenerator::Collide(ProjectileVector& proj) {
 			proj.Collide(it);
 	}
 }
+
+void EnnemiGenerator::Clear() {
+	for (auto& it : vector)
+		it.Kill();
+}
