@@ -58,9 +58,9 @@ void Arme::Shoot(ProjectileVector& projBuffer, int x, int y) {
 	case WP_FASTONE:
 		if (_timer > .05f) {
 			if(_state==0)
-				ShootProjectile(projBuffer, x, y-sin(_angle+1.5f), 0.f);
+				ShootProjectile(projBuffer, x, y-sin(_angle+(PI/2)), 0.f);
 			else
-				ShootProjectile(projBuffer, x, y+sin(_angle+1.5f), 0.f);
+				ShootProjectile(projBuffer, x, y+sin(_angle+(PI/2)), 0.f);
 			_state++;
 			_state %= 2;
 			ResetTimer();
