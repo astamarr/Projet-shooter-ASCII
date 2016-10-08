@@ -12,15 +12,27 @@ using namespace std;
 Buffer::Buffer()
 {
 	hOutput = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	dwBufferSize = { SCREEN_WIDTH,SCREEN_HEIGHT };
 	dwBufferCoord = { 0, 0 };
 	rcRegion = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
 	ReadConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,dwBufferCoord, &rcRegion);
+ 
+
+
+
+	SetConsoleScreenBufferSize(hOutput, dwBufferSize);
+	
+	
+	
+	
+	ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
 	
 	_Assets.LoadPlayerFromFile("test1.txt");
 	_Assets.LoadPlayerFromFile("ship.txt");
 	_Assets.LoadPlayerFromFile("ship2.txt");
 	_Assets.LoadPlayerFromFile("ship3.txt");
+	_Assets.LoadPlayerFromFile("gameover.txt");
 }
 Buffer::~Buffer()
 {
@@ -76,7 +88,7 @@ void Buffer::UpdateWithBuffer(int x, int y, Ressource  * External) {
 		{
 			char a;
 			a= External->_Buffer[xIterator][yIterator].Char.AsciiChar;
-		
+			if (a == ' ') continue;
 		buffer[x + xIterator][y + yIterator].Char.AsciiChar = External->_Buffer[xIterator][yIterator].Char.AsciiChar;
 		buffer[x + xIterator][y + yIterator].Attributes =  0x0a;
 		ApplyColor(x + xIterator, y + yIterator, External->_stype,a);
@@ -206,50 +218,6 @@ void Buffer::ApplyColor(int x, int y, string res, char a) {
 	}
 
 
-void Buffer::MainMenu(string file)
-{
-	ifstream infile(file, ifstream::in);
-	int number_of_lines = 0;
-	std::string line;
-	int SizeMaxOfLine = 0;
-	while (infile.good())
-	{
-		getline(infile, line);
-		if (line.length() > SizeMaxOfLine) {
-			SizeMaxOfLine = line.length();
-		}
-		for (int iterator = 0; iterator < 70; iterator++) {
-			char a = line.at(iterator);
-			buffer[number_of_lines + 10][iterator + 10].Char.AsciiChar = a;
-
-			switch (a)
-			{
-
-			case 'M':
-				buffer[number_of_lines + 10][iterator +10].Attributes = 0x0044;
-				break;
-			case 'H':
-				buffer[number_of_lines + 10][iterator + 10].Attributes = 0x44;
-				break;
-			case '0':
-				buffer[number_of_lines + 10][iterator + 10].Attributes = 0x74;
-				break;
-			}
-
-		
-			
-		}
-		++number_of_lines;
-		//cout << line;
-	}
-	Draw();
-
-	char  chk = getchar();
-	PlaySound(TEXT("intro.wav"), NULL, SND_FILENAME || SND_ASYNC);
-
-//	PlaySound(NULL, 0, 0);
-	
-}
 void Buffer::Draw() {
 	//memcpy(buffer, buffer, SCREEN_WIDTH*SCREEN_HEIGHT * sizeof(CHAR_INFO));
 	WriteConsoleOutput(hOutput, (CHAR_INFO *)buffer, dwBufferSize,
@@ -279,12 +247,24 @@ void Buffer::DrawStars() {
 		Update(starBuffer[i].y, starBuffer[i].x, starBuffer[i].c, starBuffer[i].color);
 }
 
+void Buffer::DrawWarp(float speed) {
+	int line_size = speed/50.f+1;
+	for (int i = 0; i < STARS_NUMBER; i++) {
+		int size = (starBuffer[i].x +line_size > SCREEN_WIDTH) ? SCREEN_WIDTH - starBuffer[i].x : line_size;
+		for (int j = 0; j < size; j++)
+			Update(starBuffer[i].y, starBuffer[i].x + j, starBuffer[i].c, starBuffer[i].color);
+	}
+}
+
 void Buffer::MoveStars(const float x, const float y, float time) {
 	starDeltaX += x*time;
 	starDeltaX += y*time;
 	for (int i = 0; i < STARS_NUMBER; i++) {
 		starBuffer[i].x += (int)starDeltaX;
-		starBuffer[i].x %= SCREEN_WIDTH;
+		if (starBuffer[i].x < 0) {
+			starBuffer[i].x = SCREEN_WIDTH+starBuffer[i].x;
+			starBuffer[i].y = rand() % SCREEN_HEIGHT;
+		}
 		starBuffer[i].y += (int)starDeltaY;
 		starBuffer[i].y %= SCREEN_HEIGHT;
 	}

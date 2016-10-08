@@ -56,8 +56,9 @@ void Jeu::Routine()
 
 		MainBuffer.Reset(0x00);
 		
-		MainBuffer.DrawStars();
-		level.Draw(MainBuffer);
+		if (level.Refresh(MainBuffer, time)) {
+			break;
+		}
 		MainBuffer.DrawText(std::to_string((float)(1/time)),0, 0, 0x0F);
 		MainBuffer.Draw();
 
@@ -70,15 +71,6 @@ void Jeu::Routine()
 
 		if (GetAsyncKeyState(VK_ESCAPE))
 			break;
-
-
-		MainBuffer.MoveStars(-120.f, 0, time);
-		level.Update(time);
-		level.Event(time);
-
-		
-
-		
 	}
 
 }
@@ -89,11 +81,11 @@ void Jeu::MainMenu()
 
 	MainBuffer.UpdateFromAsset(20, 50, "Mainscreen");
 	MainBuffer.Draw();
-	PlaySound(TEXT("part1.wav"), NULL, SND_FILENAME || SND_ASYNC);
+	//PlaySound(TEXT("part1.wav"), NULL, SND_FILENAME || SND_ASYNC);
 
 	char  chk = getchar();
 		PlaySound(NULL, 0, 0);
-	PlaySound(TEXT("part2.wav"), NULL, SND_FILENAME || SND_ASYNC);
+	//PlaySound(TEXT("part2.wav"), NULL, SND_FILENAME || SND_ASYNC);
 
 	//	PlaySound(NULL, 0, 0);
 

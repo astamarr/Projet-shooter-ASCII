@@ -9,6 +9,9 @@
 using namespace std;
 // JE SUIS UN GRIOS COMMENTAIRE
 class Assets;
+
+
+
 typedef struct Etoile {
 	int x;
 	int y;
@@ -20,9 +23,9 @@ class Buffer
 {
 public:
 
-	static const int SCREEN_WIDTH = 250;
+	static const int SCREEN_WIDTH = 300;
 	static const int SCREEN_HEIGHT = 70;
-	static const int STARS_NUMBER = 50;
+	static const int STARS_NUMBER = 100;
 	HANDLE hOutput;
 	CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 	COORD dwBufferCoord;
@@ -31,6 +34,7 @@ public:
 
 	SMALL_RECT rcRegion ;
 	COORD dwBufferSize;
+
 
 	Etoile starBuffer[STARS_NUMBER];
 	float starTimer = 0;
@@ -60,6 +64,7 @@ public:
 
 	void InitStars();
 	void DrawStars();
+	void DrawWarp(float speed);
 	void DrawText(std::string text, int x, int y, char color);
 	void MoveStars(const float x, const float y, float time);
 

@@ -25,7 +25,12 @@ Projectile::Projectile(const Projectile& cible) : Objet(cible){
 bool Projectile::Collide(Objet& obj) {
 	if (Objet::Collide(obj)) {
  		obj.GetHit(_damage);
+		Kill();
 		return true;
 	}
 	return false;
+}
+
+void Projectile::Draw(Buffer &buffer) {
+	buffer.CheckAndUpdate(_y, _x, '-', 0xEC);
 }

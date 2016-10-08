@@ -12,6 +12,8 @@ class Ennemi :
 {
 private:
 	int _type;
+	float _timer = 0.f;
+	float _continuousTimer = 0.f;
 	string LinkedRes;
 
 public:
@@ -23,6 +25,8 @@ public:
 	void Update(float time);
 	void Action(ProjectileVector& proj, float time);
 	void Draw(Buffer& buffer);
+
+	void Alive();
 
 };
 
