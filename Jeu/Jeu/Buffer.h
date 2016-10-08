@@ -23,7 +23,7 @@ class Buffer
 {
 public:
 
-	static const int SCREEN_WIDTH = 250;
+	static const int SCREEN_WIDTH = 300;
 	static const int SCREEN_HEIGHT = 70;
 	static const int STARS_NUMBER = 100;
 	HANDLE hOutput;
