@@ -29,6 +29,7 @@ private:
 	float levelTimer = 0;
 	float enemyTimer = 0;
 	int _levelState = 0;
+	int CurrentSector = 1;
 	float _levelSpeed = 1.f;
 	int _levelBackground = 0;
 

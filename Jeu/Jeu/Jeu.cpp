@@ -79,11 +79,12 @@ void Jeu::MainMenu()
 
 	MainBuffer.UpdateFromAsset(20, 50, "Mainscreen");
 	MainBuffer.Draw();
-	//PlaySound(TEXT("part1.wav"), NULL, SND_FILENAME || SND_ASYNC);
+	PlaySound(TEXT("part1.wav"), NULL, SND_FILENAME || SND_ASYNC);
 
 	char  chk = getchar();
 		PlaySound(NULL, 0, 0);
-	//PlaySound(TEXT("part2.wav"), NULL, SND_FILENAME || SND_ASYNC);
+	PlaySound(TEXT("part2.wav"), NULL , SND_FILENAME && SND_ASYNC && SND_LOOP  );
+	
 
 	//	PlaySound(NULL, 0, 0);
 
