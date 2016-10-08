@@ -56,7 +56,9 @@ void Jeu::Routine()
 
 		MainBuffer.Reset(0x00);
 		
-		level.Refresh(MainBuffer, time);
+		if (level.Refresh(MainBuffer, time)) {
+			break;
+		}
 		MainBuffer.DrawText(std::to_string((float)(1/time)),0, 0, 0x0F);
 		MainBuffer.Draw();
 

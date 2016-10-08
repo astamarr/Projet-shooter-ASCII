@@ -13,16 +13,23 @@ void LevelManager::Reset() {
 	player.SetMaxSpeed(50.f);
 	player.SetMaxAcc(5.f);
 	player.SetMaxDec(5.f);
+
 	_levelBackground = BG_STARS;
 	_levelSpeed = 100.f;
+	_levelState = LVL_START;
+	levelTimer = 0.f;
+
+	_end = false;
 }
 
-void LevelManager::Refresh(Buffer &buffer, float time) {
+bool LevelManager::Refresh(Buffer &buffer, float time) {
 	Draw(buffer);
 	UpdateBackground(buffer, time);
 	Update(time);
 	if(_levelState!=LVL_LOST) Event(time);
+	else MenuEvent(time);
 	UpdateLevel(buffer, time);
+	return _end;
 }
 
 void LevelManager::Update(float time) {
@@ -36,6 +43,7 @@ void LevelManager::Update(float time) {
 	levelTimer += time;
 	enemyTimer += time;
 	_boostTimer += time;
+	_menuTimer += time;
 	if (!player.isAlive())
 		_levelState = LVL_LOST;
 	
@@ -127,6 +135,17 @@ void LevelManager::DrawBackground(Buffer &buffer) {
 
 void LevelManager::DrawInterface(Buffer &buffer) {
 	buffer.DrawText(player.GetWeaponName(), 20, 0, 0x04);
+	if (_levelState == LVL_LOST) {
+		buffer.UpdateFromAsset(15, 50, "gameover");
+		if(_menuCursor == 0)
+			buffer.DrawText("Retry", 47, 20, 0xF0);
+		else
+			buffer.DrawText("Retry", 47, 20, 0x0F);
+		if(_menuCursor == 1)
+			buffer.DrawText("Quit", 48, 22, 0xF0);
+		else
+			buffer.DrawText("Quit", 48, 22, 0x0F);
+	}
 }
 
 void LevelManager::Event(float time) {
@@ -153,4 +172,25 @@ void LevelManager::Event(float time) {
 	}
 }
 
+void LevelManager::MenuEvent(float time) {
+	if (_menuTimer < 0.5f)
+		return;
+	if (GetAsyncKeyState('Z')) {
+		--_menuCursor;
+		if (_menuCursor < 0)
+			_menuCursor = _menuNumber - 1;
+		_menuTimer = 0.f;
+	}
+	if (GetAsyncKeyState('S')) {
+		++_menuCursor;
+		_menuCursor %= _menuNumber;
+		_menuTimer = 0.f;
+	}
+	if (GetAsyncKeyState(VK_RETURN)) {
+		if (_menuCursor == 0)
+			Reset();
+		else
+			_end = true;
+	}
+}
 

@@ -24,6 +24,11 @@ private:
 	PlayerObject player;
 	float _boostTimer = 0.f;
 
+	int _menuCursor = 0;
+	int _menuNumber = 2;
+	float _menuTimer = 0;
+	bool _end = false;
+
 	Assets &_assets;
 
 	float levelTimer = 0;
@@ -41,7 +46,7 @@ public:
 
 	void Reset();
 
-	void Refresh(Buffer &buffer, float time);
+	bool Refresh(Buffer &buffer, float time);
 
 	void Update(float time);
 	void UpdateLevel(Buffer &buffer, float time);
@@ -51,6 +56,7 @@ public:
 	void DrawInterface(Buffer &buffer);
 	
 	void Event(float time);
+	void MenuEvent(float time);
 
 };
 
