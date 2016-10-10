@@ -53,6 +53,8 @@ void Jeu::Routine()
 	while (true) {
 
 		time = timer.getElapsedSeconds(true);
+		if (time > 1.f)
+			time = 1.f;
 
 		MainBuffer.Reset(0x00);
 		
@@ -81,11 +83,12 @@ void Jeu::MainMenu()
 
 	MainBuffer.UpdateFromAsset(20, 50, "Mainscreen");
 	MainBuffer.Draw();
-	//PlaySound(TEXT("part1.wav"), NULL, SND_FILENAME || SND_ASYNC);
+	PlaySound(TEXT("part1.wav"), NULL, SND_FILENAME || SND_ASYNC);
 
 	char  chk = getchar();
 		PlaySound(NULL, 0, 0);
-	//PlaySound(TEXT("part2.wav"), NULL, SND_FILENAME || SND_ASYNC);
+	PlaySound(TEXT("part2.wav"), NULL , SND_FILENAME && SND_ASYNC && SND_LOOP  );
+	
 
 	//	PlaySound(NULL, 0, 0);
 
