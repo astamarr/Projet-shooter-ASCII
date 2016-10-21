@@ -18,6 +18,11 @@ void LevelManager::Reset() {
 	_levelSpeed = 100.f;
 	_levelState = LVL_START;
 	levelTimer = 0.f;
+	CurrentSector = 1;
+
+	ennemis.Clear();
+	ennemiProjectile.Clear();
+	playerProjectile.Clear();
 
 	_end = false;
 }
@@ -78,7 +83,7 @@ void LevelManager::UpdateLevel(Buffer &buffer, float time) {
 	case LVL_WARPING:
 		_levelBackground = BG_WARP;
 	
-		if (levelTimer < 10.f && _levelSpeed < 1000.f)
+		if (levelTimer < 10.f && _levelSpeed < 500.f)
 			_levelSpeed += time * 200;
 		if (levelTimer > 10.f && _levelSpeed >100.f) {
 			_levelSpeed -= time * 200;
@@ -92,9 +97,7 @@ void LevelManager::UpdateLevel(Buffer &buffer, float time) {
 		}
 		break;
 	case LVL_LOST:
-		//buffer.DrawText("Perdu!", 10, 5, 0x0F);
-		buffer.UpdateFromAsset(15, 50, "gameover");
-		buffer.DrawText(to_string(CurrentSector - 1) + "SECTOR CLEANED", 60, 20, 0x02);
+		
 		break;
 	default:
 		break;
@@ -138,6 +141,7 @@ void LevelManager::DrawInterface(Buffer &buffer) {
 	buffer.DrawText(player.GetWeaponName(), 20, 0, 0x04);
 	if (_levelState == LVL_LOST) {
 		buffer.UpdateFromAsset(15, 50, "gameover");
+		buffer.DrawText(to_string(CurrentSector - 1) + "SECTOR CLEANED", 60, 20, 0x02);
 		if(_menuCursor == 0)
 			buffer.DrawText("Retry", 47, 20, 0xF0);
 		else
@@ -171,7 +175,7 @@ void LevelManager::Event(float time) {
 		player.SetYSpeed(-100.f);
 		_boostTimer = 0;
 	}
-	GetAsyncKeyState(VK_RETURN);
+	GetAsyncKeyState(VK_RETURN); //Remets à zero l'état de la touche pour le menu
 }
 
 void LevelManager::MenuEvent(float time) {

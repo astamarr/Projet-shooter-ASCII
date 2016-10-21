@@ -23,5 +23,7 @@ public:
 	Objet& operator[](unsigned int index) { return vector[index]; };
 	void Draw(Buffer& buffer);
 	void UpdateWithBoundCheck(float time);
+
+	void Clear();
 };
 

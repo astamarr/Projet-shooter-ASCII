@@ -26,7 +26,7 @@ public:
 	void Update(float time);
 	void Shoot(ProjectileVector& proj);
 	void Draw(Buffer& buffer);
-	void GetHit(int damage);
+	virtual void GetHit(int damage);
 	void SetLife(int life) { _life = life; };
 	
 	void Left() { _xSpeed = -_maxSpeed; };

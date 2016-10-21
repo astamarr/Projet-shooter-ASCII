@@ -30,8 +30,11 @@ bool EnnemiGenerator::Collide(Objet& cible) {
 void EnnemiGenerator::Generate(int seed) {
 	switch (seed) {
 		case 0:
-			AddEnnemi(Ennemi(EN_BASIC, Buffer::SCREEN_WIDTH - 1, rand() % Buffer::SCREEN_HEIGHT));
-			AddEnnemi(Ennemi(EN_RUNNER, Buffer::SCREEN_WIDTH - 1, rand() % Buffer::SCREEN_HEIGHT));
+			switch (rand() % 3) {
+			case 0:AddEnnemi(Ennemi(EN_BASIC, Buffer::SCREEN_WIDTH - 1, rand() % Buffer::SCREEN_HEIGHT)); break;
+			case 1:AddEnnemi(Ennemi(EN_RUNNER, Buffer::SCREEN_WIDTH - 1, rand() % Buffer::SCREEN_HEIGHT)); break;
+			case 2:AddEnnemi(Ennemi(EN_BIGONE, Buffer::SCREEN_WIDTH - 1, rand() % Buffer::SCREEN_HEIGHT)); break;
+			}
 			break;
 		default:
 			break;

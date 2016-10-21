@@ -62,3 +62,8 @@ void ProjectileVector::UpdateWithBoundCheck(float time) {
 			it.Kill();
 	}
 }
+
+void ProjectileVector::Clear() {
+	for (auto& it : vector)
+		it.Kill();
+}

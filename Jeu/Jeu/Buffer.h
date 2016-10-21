@@ -15,17 +15,20 @@ class Assets;
 typedef struct Etoile {
 	int x;
 	int y;
+	float deltaX;
+	float deltaY;
 	char c;
 	char color;
+	float distance;
 } Etoile;
 
 class Buffer
 {
 public:
 
-	static const int SCREEN_WIDTH = 300;
-	static const int SCREEN_HEIGHT = 70;
-	static const int STARS_NUMBER = 100;
+	static const int SCREEN_WIDTH = 150;
+	static const int SCREEN_HEIGHT = 50;
+	static const int STARS_NUMBER = 150;
 	HANDLE hOutput;
 	CHAR_INFO buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 	COORD dwBufferCoord;

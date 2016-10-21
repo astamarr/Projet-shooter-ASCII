@@ -36,6 +36,7 @@ Buffer::Buffer()
 }
 Buffer::~Buffer()
 {
+
 }
 
 
@@ -238,7 +239,13 @@ void Buffer::InitStars() {
 		starBuffer[i].x = rand() % SCREEN_WIDTH;
 		starBuffer[i].y = rand() % SCREEN_HEIGHT;
 		starBuffer[i].c = '*';
-		starBuffer[i].color = rand() % 0x0F;
+		starBuffer[i].distance = (rand() % 1000)/500.f +1;
+		if(starBuffer[i].distance>2.f)
+			starBuffer[i].color = 0x07;
+		else
+			starBuffer[i].color = 0x0F;
+		starBuffer[i].deltaX = 0.f;
+		starBuffer[i].deltaY = 0.f;
 	}
 }
 
@@ -259,14 +266,20 @@ void Buffer::DrawWarp(float speed) {
 void Buffer::MoveStars(const float x, const float y, float time) {
 	starDeltaX += x*time;
 	starDeltaX += y*time;
+	Etoile *current;
 	for (int i = 0; i < STARS_NUMBER; i++) {
-		starBuffer[i].x += (int)starDeltaX;
+		current = &(starBuffer[i]);
+		current->deltaX += (x*time) / current->distance;
+		current->deltaY += (y*time) / current->distance;
+		current->x += (int)current->deltaX;
 		if (starBuffer[i].x < 0) {
 			starBuffer[i].x = SCREEN_WIDTH+starBuffer[i].x;
 			starBuffer[i].y = rand() % SCREEN_HEIGHT;
 		}
-		starBuffer[i].y += (int)starDeltaY;
-		starBuffer[i].y %= SCREEN_HEIGHT;
+		current->y += (int)current->deltaY;
+		current->y %= SCREEN_HEIGHT;
+		current->deltaX -= (int)current->deltaX;
+		current->deltaY -= (int)current->deltaY;
 	}
 	starDeltaX -= (int)starDeltaX;
 	starDeltaY -= (int)starDeltaY;

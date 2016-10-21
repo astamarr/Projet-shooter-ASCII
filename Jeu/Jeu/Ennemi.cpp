@@ -40,6 +40,16 @@ void Ennemi::Set() {
 		_maxDec = 25.f;
 		_life = 1;
 		break;
+	case EN_BIGONE:
+		_arme.SetType(WP_LASER);
+		_arme.SetAngle(180.f);
+		_collisionRadius = 3;
+		_maxSpeed = 30.f;
+		_maxAcc = 5.f;
+		_maxDec = 5.f;
+		_life = 4;
+		LinkedRes = "runner";
+		break;
 	default:
 		break;
 	}
@@ -76,12 +86,26 @@ void Ennemi::Action(ProjectileVector& proj, float time) {
 		else {
 			Move(-1, 0, time);
 		}
+		break;
+	case EN_BIGONE:
+		if (_continuousTimer < 5.f) {
+			Move(-1, 0, time);
+			Shoot(proj);
+		}
+		else {
+			Move(-25, 0, time);
+		}
+		break;
 	default:
 		break;
 	}
 }
 
-
+void Ennemi::GetHit(int damage) {
+	_life -= damage;
+	if (_life <= 0)
+		Kill();
+}
 
 
 void Ennemi::Draw(Buffer& buffer) {

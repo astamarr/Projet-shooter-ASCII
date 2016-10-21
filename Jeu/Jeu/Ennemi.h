@@ -25,6 +25,7 @@ public:
 	void Update(float time);
 	void Action(ProjectileVector& proj, float time);
 	void Draw(Buffer& buffer);
+	void GetHit(int damage);
 
 	void Alive();
 
