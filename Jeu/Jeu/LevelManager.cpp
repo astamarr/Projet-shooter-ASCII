@@ -83,7 +83,7 @@ void LevelManager::UpdateLevel(Buffer &buffer, float time) {
 	case LVL_WARPING:
 		_levelBackground = BG_WARP;
 	
-		if (levelTimer < 10.f && _levelSpeed < 500.f)
+		if (levelTimer < 10.f && _levelSpeed < 1000.f)
 			_levelSpeed += time * 200;
 		if (levelTimer > 10.f && _levelSpeed >100.f) {
 			_levelSpeed -= time * 200;

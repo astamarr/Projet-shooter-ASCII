@@ -239,8 +239,8 @@ void Buffer::InitStars() {
 		starBuffer[i].x = rand() % SCREEN_WIDTH;
 		starBuffer[i].y = rand() % SCREEN_HEIGHT;
 		starBuffer[i].c = '*';
-		starBuffer[i].distance = (rand() % 1000)/500.f +1;
-		if(starBuffer[i].distance>2.f)
+		starBuffer[i].distance = (rand() % 1000)/250.f +1;
+		if(starBuffer[i].distance>2.5f)
 			starBuffer[i].color = 0x07;
 		else
 			starBuffer[i].color = 0x0F;
