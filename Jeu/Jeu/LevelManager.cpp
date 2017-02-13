@@ -139,13 +139,13 @@ void LevelManager::DrawInterface(Buffer &buffer) {
 	if (_levelState == LVL_LOST) {
 		buffer.UpdateFromAsset(15, 50, "gameover");
 		if(_menuCursor == 0)
-			buffer.DrawText("Retry", 47, 20, 0xF0);
-		else
 			buffer.DrawText("Retry", 47, 20, 0x0F);
-		if(_menuCursor == 1)
-			buffer.DrawText("Quit", 48, 22, 0xF0);
 		else
+			buffer.DrawText("Retry", 47, 20, 0x04);
+		if(_menuCursor == 1)
 			buffer.DrawText("Quit", 48, 22, 0x0F);
+		else
+			buffer.DrawText("Quit", 48, 22, 0x04);
 	}
 }
 
